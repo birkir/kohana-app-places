@@ -1,0 +1,72 @@
+@import "style.reset.css";
+
+/** Basic layout **/
+body { font-family:Arial; font-size: 10px; background:#e8f3ff url(/img/background.png) top repeat-x; min-width: 245px; margin: 0 auto; padding: 0; -webkit-user-select: none; -webkit-text-size-adjust: none;  }
+#page { max-width:480px; margin:0 auto; overflow:hidden; }
+#page #head { height:90px; position:relative; }
+#page #head #logo { position:absolute; top:18px; left:10px; }
+#page #head #logo img { float:left; }
+#page #head #shortcuts { position:absolute; top:18px; right:0; }
+#page #head #shortcuts ul li { float:left; margin:0 15px 0 0; }
+#frame { padding:10px 12px 10px 10px; }
+#frame ul li { width:100%; }
+#foot { background: url(http://d.eat.is/img/480/landscape.png) no-repeat 50% 0%; height:225px; }
+div.clear { clear:both; }
+.aleft { text-align:left; }
+.aright { text-align:right; }
+.acenter { text-align:center; }
+
+/** Rounded corners **/
+.cbb { padding:26px 20px; background:#ffffff; }
+.cb { margin:5px 0; }
+.bt, .bt div, .bb, .bb div { background:url(/img/corners.png) no-repeat; }
+.i1, .i2 { background:url(/img/borders.png) repeat-y; }
+.bt { background-position:100% 0; margin:0 0 0 18px; height:23px; }
+.bt div { height:24px; width:18px; position:relative; left:-18px; top:-1px; background-position:0 0; }
+.bb { background-position:100% 100%; margin:0 0 0 22px; height:26px; }
+.bb div { height:26px; width:22px; position:relative; left:-22px; background-position:0 100%; }
+.i1 { padding:0 0 0 12px; background-position:0 0; }
+.i2 { padding:0 12px 0 0; background-position:100% 0; }
+.i3 { position: relative; background:#ffffff; padding:0 10px; }
+
+
+/** Menu list **/
+ul.menu { margin:0; }
+ul.menu .i3 { height:12px; }
+ul.menu a { font-size:22px; @font-size: 16px; line-height:11px; display:block; float:left; width:100%; margin:0; font-family:"Arial black"; font-weight:bold; text-transform:uppercase; text-decoration:none; color:#5988cc; }
+
+/** Basic list **/
+ul.list {}
+ul.list li {}
+ul.list li a {}
+
+/** Stars **/
+ul.stars {}
+ul.stars li {}
+ul.stars li a {}
+ul.stars li a.half {}
+ul.stars li a.empty {}
+
+/** Errors */
+div.errors { background:pink; border:3px solid red; padding:10px; margin:0 0 15px 0; }
+div.errors ul li { list-style-type:disc; font-size:17px; margin:0 0 0 25px; line-height:20px; }
+
+/** Text **/
+p { font-size:20px; margin:0 0 10px 0; }
+ul.text { margin:0 0 0 25px; }
+ul.text li { font-size:22px; line-height:25px; list-style-type:disc; padding:0 0 10px 0; }
+
+
+/** Fieldsets **/
+fieldset {}
+fieldset dl {}
+fieldset dl dt { margin:0 0 3px 0; }
+fieldset dl dt label { font-size:20px; font-weight:bold; }
+fieldset dl dd { margin:0 0 10px 0; }
+fieldset dl dd table { width:100%; margin:5px 0 0 0; }
+fieldset dl dd table tr th { font-size:14px; }
+fieldset dl dd table tr td { text-align:center; }
+
+/** Form objects **/
+input[type='submit'], input[type='button'], button { font-size:20px; padding:4px 8px; float: right; }
+input[type='text'], input[type='password'], input[type='email'], textarea { background:#ffffff; -webkit-box-shadow:inset 2px 2px 5px rgba(0,0,0,0.15); -webkit-border-radius:5px; font-size:20px; padding:6px; border:solid 2px #cccccc; width:96.5%; }
