@@ -1,0 +1,61 @@
+Database schema:
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `category_id` int(11) NOT NULL auto_increment,
+  `title` varchar(64) default NULL,
+  `alias` varchar(64) default NULL,
+  `index` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL default '1',
+  `removed` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `foods` (
+  `food_id` int(11) NOT NULL auto_increment,
+  `title` varchar(64) NOT NULL,
+  `enabled` tinyint(1) NOT NULL default '1',
+  `removed` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`food_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `hours` (
+  `hour_id` int(11) NOT NULL auto_increment,
+  `place_id` int(11) NOT NULL,
+  `day_of_week` tinyint(1) NOT NULL,
+  `open` int(11) NOT NULL,
+  `close` int(11) NOT NULL,
+  PRIMARY KEY  (`hour_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `places` (
+  `place_id` int(11) NOT NULL auto_increment,
+  `title` varchar(128) NOT NULL,
+  `website` varchar(128) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `phone` varchar(32) NOT NULL,
+  `description` text NOT NULL,
+  `street_name` varchar(128) NOT NULL,
+  `street_number` varchar(12) NOT NULL,
+  `zip` int(3) NOT NULL,
+  `city` varchar(16) NOT NULL,
+  `price_from` int(11) NOT NULL,
+  `price_to` int(11) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `enabled` tinyint(1) NOT NULL default '1',
+  `removed` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`place_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `places_categories` (
+  `place_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `enabled` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`place_id`,`category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `places_food` (
+  `place_id` int(11) NOT NULL,
+  `food_id` int(11) NOT NULL,
+  PRIMARY KEY  (`place_id`,`food_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
