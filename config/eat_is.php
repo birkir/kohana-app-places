@@ -2,8 +2,12 @@
 
 return array
 (
+	'project' => array(
+		'title' => 'Eat.is',
+	),
 	'cookies' => array(
 		'domain' => '.innsyn.is',
-		'expires' => 86400 * 6 * 4,
+		'expiration' => 86400 * 6 * 4,
+		'salt' => 'eat.habibi:)',
 	),
 );

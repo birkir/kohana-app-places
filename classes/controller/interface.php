@@ -18,16 +18,14 @@ class Controller_Interface extends Controller {
 	public function before()
 	{
 		$this->template = new View('smarty:default');
-
-		// Project 
-		$project = (object) array(
-			"title" => "Eat.is"
-		);
-		View::set_global("project", $project);
+		$this->config = Kohana::config("eat_is");
 		
-		Cookie::$expiration = 60 * 60 * 24 * 30; // 30 dagar ?
-		Cookie::$domain = ".eat.is";
-		Cookie::$salt = "eat.habibi:)";
+		// Project 
+		View::set_global("project", (object) $this->config['project']);
+		
+		Cookie::$expiration = $this->config['cookies']['expiration'];
+		Cookie::$domain = $this->config['cookies']['domain'];
+		Cookie::$salt = $this->config['cookies']['salt'];
 		
 		// Languages
 		$this->language = Cookie::get("language", $this->language);
