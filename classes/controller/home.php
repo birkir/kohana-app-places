@@ -6,7 +6,7 @@ class Controller_Home extends Controller_Interface {
 
 	public function action_index()
 	{
-		$view = new View('smarty:home/menu');
+		$view = new View('smarty:home/default');
 		
 		$view->menu = (object) array(
 			(object) array(
