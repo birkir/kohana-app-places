@@ -38,6 +38,7 @@
 {/if}
 			</div>
 		</div>
+		<div id="footoffset"></div>
 		<div id="foot"></div>
 	</body>
 </html>

@@ -10,7 +10,8 @@ body { font-family:Arial; font-size: 10px; background:#e8f3ff url(../img/backgro
 #page #head #shortcuts ul li { float:left; margin:0 15px 0 0; }
 #frame { padding:10px 12px 10px 10px; }
 #frame ul li { width:100%; }
-#foot { background: url(../img/landscape.png) no-repeat 50% 0%; height:225px; }
+#foot { background: url(../img/landscape.png) no-repeat 50% 0%; height:225px; width:100%; position:relative; }
+#foot.bottom { position:absolute; bottom:0; }
 div.clear { clear:both; }
 .aleft { text-align:left; }
 .aright { text-align:right; }

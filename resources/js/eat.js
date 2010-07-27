@@ -1,39 +1,57 @@
 var _w = window;
-var _h = window;
 var d = document;
 var w = get_width();
+var h = get_height();
+var x = null;
+var xx = null;
 var ratio = w/480;
 if(w>480)
 {
 	ratio = 1;
 }
 
-function offset_top(obj) {
-	var curleft = curtop = 0;
-	if (obj.offsetParent) {
-	do {
-			curleft += obj.offsetLeft;
-			curtop += obj.offsetTop;
-		} while (obj = obj.offsetParent);
+function setHeight()
+{
+	x = d.getElementById("foot");
+	xx = d.getElementById("footoffset");
+	if ((get_top(xx)+225) < h)
+	{
+		x.setAttribute("class", "bottom");
+	}else
+	{
+		x.setAttribute("class", "");
 	}
-	return curtop;
+}
+
+function get_top(elm)
+{
+	var y = 0;
+	y = elm.offsetTop;
+	elm = elm.offsetParent;
+	while(elm != null)
+	{
+		y = parseInt(y) + parseInt(elm.offsetTop);
+		elm = elm.offsetParent;
+	}
+	
+	return y;
 }
 
 function get_height()
 {
-        if (typeof(_h.innerHeight) == 'number')
-        {
-          __h = _h.innerHeight;
-        }
-        else if (d.documentElement && d.documentElement.clientHeight)
-        {
-                 __h = d.documentElement.clientHeight;
-        }
-        else if (d.body && d.body.clientHeight)
-        {
-          __h = d.body.clientHeight;
-        }
-        return __h;
+	if (typeof(_w.innerHeight) == 'number')
+	{
+	  __h = _w.innerHeight;
+	}
+	else if (d.documentElement && d.documentElement.clientHeight)
+	{
+		 __h = d.documentElement.clientHeight;
+	}
+	else if (d.body && d.body.clientHeight)
+	{
+	  __h = d.body.clientHeight;
+	}
+	return __h;
 }
 
 function get_width()
@@ -67,8 +85,18 @@ function addEvent( obj, type, fn )
 
 function resizeEat()
 {
-	h = get_height();
 	w = get_width();
+	h = get_height();
+	
+	if ((get_top(xx)+225) < h)
+	{
+		x.setAttribute("class", "bottom");
+	}
+	else
+	{
+		x.setAttribute("class", "");
+	}
+	
 	ratio = w/480;
 	if(w>480)
 	{
@@ -86,4 +114,5 @@ function resizeEat()
 if(document.getElementById && document.createTextNode)
 {
 	addEvent(window, 'resize', resizeEat);
+	addEvent(window, 'load', setHeight);
 }
