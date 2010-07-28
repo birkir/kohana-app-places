@@ -45,6 +45,7 @@ class Controller_Resources extends Controller {
 		$this->request->headers['Content-length'] = filesize($file);
 		$this->request->headers['Last-Modified']  = date('r', filemtime($file));
 		
+		
 		if (isset($cache))
 		{
 			$this->request->headers['Cache-Control'] = 'must-revalidate';
