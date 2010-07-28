@@ -9,6 +9,10 @@ if(w>480)
 {
 	ratio = 1;
 }
+img_corners = new Image(10,10);
+img_corners.src="/resources/img/corners.png";
+img_borders = new Image(10,10);
+img_borders.src="/resources/img/borders.png";
 
 function setHeight()
 {

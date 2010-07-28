@@ -1,4 +1,20 @@
-@import "style.reset.css";
+/**
+ * CSS Reset file
+ * should be @import "style.reset.css"; in developing mode
+ *
+ * @required	Still needs table cellpadding='0'
+ * @author		Birkir R Gudjonsson (c) 2010
+ */
+HTML, BODY, DIV, SPAN, APPLET, OBJECT, IFRAME, H1, H2, H3, H4, H5, H6, P, BLOCKQUOTE, PRE,A, ABBR, ACRONYM, ADDRESS, BIG, CITE, CODE,DEL, DFN, EM, FONT, IMG, INS, KBD, Q, S, SAMP,SMALL, STRIKE, STRONG, SUB, SUP, TT, VAR,B, U, I, CENTER,DL, DT, DD, OL, UL, LI,FIELDSET, FORM, LABEL, LEGEND,TABLE, CAPTION, TBODY, TFOOT, THEAD, TR, TH, TD { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+BODY { line-height: 1; }
+OL, UL { list-style: none; }
+BLOCKQUOTE, Q { quotes: none; }
+BLOCKQUOTE:before, BLOCKQUOTE:after,
+Q:before, Q:after { content: ''; content: none; }
+:focus { outline: 0; }
+INS { text-decoration: none; }
+DEL { text-decoration: line-through; }
+TABLE { border-collapse: collapse; border-spacing: 0; }
 
 /** Basic layout **/
 body { font-family:Arial; font-size: 10px; background:#e8f3ff url(../img/background.png) top repeat-x; min-width: 245px; margin: 0 auto; padding: 0; -webkit-user-select: none; -webkit-text-size-adjust: none;  }
