@@ -8,7 +8,7 @@
  * @see  http://kohanaframework.org/guide/using.configuration
  * @see  http://php.net/timezones
  */
-date_default_timezone_set('America/Chicago');
+date_default_timezone_set('Atlantic/Reykjavik');
 
 /**
  * Set the default locale.
@@ -68,12 +68,12 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-		'database'   => MODPATH.'database',   // Database access
-		'pagination' => MODPATH.'pagination', // Paging of results
-		'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-		'orm'  		 => MODPATH.'orm',  		  // Object Relationship Mapping
-		'smarty'		 => MODPATH.'smarty', 	  // Smarty template engine
-		'minify'		 => MODPATH.'minify' 	  // Minify module
+		'database'		 => MODPATH.'database',		// Database access
+		'pagination'	 => MODPATH.'pagination',	// Paging of results
+		'userguide'		 => MODPATH.'userguide',	// User guide and API documentation
+		'orm'			 => MODPATH.'orm',			// Object Relationship Mapping
+		'smarty'		 => MODPATH.'smarty',		// Smarty template engine
+		'minify'		 => MODPATH.'minify'		// Minify module
 	));
 
 /**
