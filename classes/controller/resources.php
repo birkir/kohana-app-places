@@ -18,6 +18,7 @@ class Controller_Resources extends Controller {
 	public function action_css($file='')
 	{
 		$file = APPPATH.$this->_directory.$this->request->action."/".$file;
+		$file = $this->minify($file, "css");
 		$file = $this->gzip($file);
 		$this->passthru($file, true);
 	}
@@ -25,8 +26,29 @@ class Controller_Resources extends Controller {
 	public function action_js($file='')
 	{
 		$file = APPPATH.$this->_directory.$this->request->action."/".$file;
+		$file = $this->minify($file, "js");
 		$file = $this->gzip($file);
 		$this->passthru($file, true);
+	}
+	
+	public function minify($file='', $type='css')
+	{
+		if (!is_file($file))
+		{
+			throw new Kohana_Exception('File does not exist');
+		}
+		
+		$this->minified = APPPATH.'cache/minify/'.md5_file($file);
+		
+		$file_content = file_get_contents($file);
+		
+		$min_content = Minify::factory($type)->set($file_content)->min();
+		
+		$fh = fopen($this->minified, "w+");
+		fwrite($fh, $min_content);
+		fclose($fh);
+		
+		return $this->minified;
 	}
 
 	public function passthru($file='', $gzip=false)
