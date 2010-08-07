@@ -25,12 +25,18 @@ class Controller_Places extends Controller_Interface {
 	 */
 	public function action_category($category=NULL)
 	{
+		$view = new View('smarty:places/list');
+		
 		$category = ORM::factory('category')
 		->where(is_numeric($category) ? 'category_id' : 'alias', '=', $category)
 		->find();
 		
-		$places = $category->place->find_all();
+		$view->items = $category->place
+		->where('enabled', '=', 1)
+		->where('removed', '=', 0)
+		->find_all();
 		
+		$this->template->view = $view;
 	}
 	
 	/**
