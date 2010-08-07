@@ -25,6 +25,11 @@ class Controller_Places extends Controller_Interface {
 	 */
 	public function action_category($category=NULL)
 	{
+		$category = ORM::factory('category')
+		->where(is_numeric($category) ? 'category_id' : 'alias', '=', $category)
+		->find();
+		
+		$places = $category->place->find_all();
 		
 	}
 	
