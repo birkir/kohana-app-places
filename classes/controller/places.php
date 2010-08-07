@@ -21,6 +21,34 @@ class Controller_Places extends Controller_Interface {
 	}
 	
 	/**
+	 * Find one place
+	 */
+	public function action_view($place=NULL)
+	{
+		$view = new View('smarty:places/default');
+		
+		$hour = new Model_Hour;
+		
+		$view->place = ORM::factory("place")
+		->where(is_numeric($place) ? 'place_id' : 'alias', '=', $place)
+		->where("enabled", "=", 1)
+		->where("removed", "=", 0)
+		->find();
+		
+		$this->title = $view->place->title;
+		
+		$view->hours = $hour->pretty_hour(
+			$view->place
+			->hours
+			->order_by("day_of_week", "asc")
+			->order_by("close", "asc")
+			->find_all()
+		);
+		
+		$this->template->view = $view;
+	}
+	
+	/**
 	 * Find places by category
 	 */
 	public function action_category($category=NULL)
