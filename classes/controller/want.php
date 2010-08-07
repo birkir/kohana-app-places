@@ -7,6 +7,15 @@ class Controller_Want extends Controller_Interface {
 	**/
 	public function action_index()
 	{
+		$view = new View('smarty:home/default');
+		
+		$view->menu = ORM::factory('food')
+		->order_by('title', 'ASC')
+		->find_all();
+		
+		$view->prefix = 'places/food/';
+		
+		$this->template->view = $view;
 	}
 
 }

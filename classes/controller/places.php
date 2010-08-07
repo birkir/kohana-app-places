@@ -40,6 +40,25 @@ class Controller_Places extends Controller_Interface {
 	}
 	
 	/**
+	 * Find places by food type
+	 */
+	public function action_food($food=NULL)
+	{
+		$view = new View('smarty:places/list');
+		
+		$food = ORM::factory('food')
+		->where(is_numeric($food) ? 'food_id' : 'alias', '=', $food)
+		->find();
+		
+		$view->items = $food->place
+		->where('enabled', '=', 1)
+		->where('removed', '=', 0)
+		->find_all();
+		
+		$this->template->view = $view;
+	}
+	
+	/**
 	 * Get random place
 	**/
 	public function action_random()
