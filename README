@@ -44,13 +44,12 @@ CREATE TABLE IF NOT EXISTS `places` (
   `longitude` double NOT NULL,
   `enabled` tinyint(1) NOT NULL default '1',
   `removed` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`place_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+  PRIMARY KEY (`place_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `places_categories` (
   `place_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`place_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -59,3 +58,11 @@ CREATE TABLE IF NOT EXISTS `places_food` (
   `food_id` int(11) NOT NULL,
   PRIMARY KEY  (`place_id`,`food_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `rating` (
+  `rating_id` INT( 11 ) NOT NULL auto_increment,
+  `place_id` INT( 11 ) NOT NULL ,
+  `rating` TINYINT( 1 ) NOT NULL ,
+  `user_id` INT( 11 ) NOT NULL
+  PRIMARY KEY  (`rating_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
