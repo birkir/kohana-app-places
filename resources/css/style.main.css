@@ -49,7 +49,7 @@ div.clear { clear:both; }
 /** Menu list **/
 ul.menu { margin:0; }
 ul.menu .i3 { height:12px; }
-ul.menu a { font-size:22px; @font-size: 16px; line-height:11px; display:block; float:left; width:100%; margin:0; font-family:"Arial black"; font-weight:bold; text-transform:uppercase; text-decoration:none; color:#5988cc; }
+ul.menu a { font-size:22px; line-height:11px; display:block; float:left; width:100%; margin:0; font-family:"Arial black"; font-weight:bold; text-transform:uppercase; text-decoration:none; color:#5988cc; }
 
 /** Basic list **/
 ul.list {}
