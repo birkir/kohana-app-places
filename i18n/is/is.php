@@ -55,8 +55,16 @@ return array
 	// Food types
 	'Food type' => 'Fæðutegund',
 	'Food types' => 'Fæðutegundir',
-		'Hamburgers' => 'Hamborgarar',
-		'Pizzas' => 'Pizza',
+		'Hamburger' => 'Hamborgarar',
+		'Chicken' => 'Kjúklingur',
+		'Pie' => 'Bökur',
+		'Sandwich' => 'Samlokur',
+		'Chinese' => 'Kínverskur',
+		'Beef' => 'Nautakjöt',
+		'Fish' => 'Fiskur',
+		'Soup' => 'Súpur',
+		'Fruit' => 'Ávextir',
+		
 	
 	// Places
 	'Restaurants' => 'Veitingastaðir',

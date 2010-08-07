@@ -126,25 +126,46 @@ class Controller_Places extends Controller_Interface {
 		
 		$view->food = $food->find_all();
 		
-		$view->days = array(
-			"Mon",
-			"Tue",
-			"Wed",
-			"Thu",
-			"Fri",
-			"Sat",
-			"Sun"
-		);
-		
-		$view->hours = range(0,23);
-		
 		if (isset($_POST['save']))
 		{
 			$place = ORM::factory('place');
 			
 			if ($place->values($_POST)->check())
 			{
-				$place->save();
+				$place_id = $place->save();
+				
+				// Add hours
+				foreach ($this->parse_hours($_POST['opening_hours']) as $item)
+				{
+					foreach ($item['days'] as $day)
+					{
+						DB::insert('hours')
+						->columns(array('place_id', 'day_of_week', 'open', 'close'))
+						->values(array($place_id, $day, $item['open'], $item['close']))
+						->execute();
+					}
+				}
+				
+				// Add categories
+				foreach ($_POST['categories'] as $category)
+				{
+					DB::insert('places_categories')
+					->columns(array('place_id', 'category_id'))
+					->values(array($place_id, $category))
+					->execute();
+				}
+				
+				// Add food types
+				foreach ($_POST['food_type'] as $food_type)
+				{
+					DB::insert('places_food')
+					->columns(array('place_id', 'food_id'))
+					->values(array($place_id, $food_type))
+					->execute();
+				}
+				
+				// Redirect to place
+				$this->request->redirect('/places/view/'.$place_id);
 			}
 			else
 			{
@@ -193,8 +214,8 @@ class Controller_Places extends Controller_Interface {
 			
 			if (isset($output[1]) AND count($output[1])==2)
 			{
-				$_hours['open'] = str_pad(str_replace(":", "", $output[1][0]), 4, 0, STR_PAD_RIGHT);
-				$_hours['close'] = str_pad(str_replace(":", "", $output[1][1]), 4, 0, STR_PAD_RIGHT);
+				$_hours['open'] = str_pad(str_replace(array(":", "."), "", $output[1][0]), 4, 0, STR_PAD_RIGHT);
+				$_hours['close'] = str_pad(str_replace(array(":", "."), "", $output[1][1]), 4, 0, STR_PAD_RIGHT);
 			}
 			
 			if (count($_hours) == 2)
