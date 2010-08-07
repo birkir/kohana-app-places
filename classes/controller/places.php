@@ -2,38 +2,22 @@
 
 class Controller_Places extends Controller_Interface {
 
-	public $title = "Places";
+	public $title = 'Places';
 
 	public function action_index()
 	{
 		$view = new View('smarty:home/default');
 		
-		$view->menu = (object) array(
-			(object) array(
-				"title" => "Restaurants",
-				"alias" => "restaurants"
-			),
-			(object) array(
-				"title" => "Fast food",
-				"alias" => "fastfood"
-			),
-			(object) array(
-				"title" => "Shops",
-				"alias" => "shops"
-			),
-			(object) array(
-				"title" => "Bars",
-				"alias" => "bars"
-			),
-			(object) array(
-				"title" => "Coffee Shops",
-				"alias" => "coffeshops"
-			)
-		);
+		$view->menu = ORM::factory('category')
+		->order_by('index', 'ASC')
+		->find_all();
 		
 		$this->template->view = $view;
 	}
 	
+	/**
+	 * Get random place
+	**/
 	public function action_random()
 	{
 		$view = new View('smarty:places/default');
@@ -56,6 +40,9 @@ class Controller_Places extends Controller_Interface {
 		$this->template->view = $view;
 	}
 	
+	/**
+	 * Create new place
+	**/
 	public function action_new()
 	{
 		$food = new Model_Food;
@@ -95,6 +82,12 @@ class Controller_Places extends Controller_Interface {
 		$this->template->view = $view;
 	}
 	
+	/**
+	 * Parse hours function
+	 *
+	 * @param	string	String to parse
+	 * @return	array		Output array
+	**/
 	public function parse_hours($str='')
 	{
 		$day_strs = array(
