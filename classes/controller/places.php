@@ -57,8 +57,6 @@ class Controller_Places extends Controller_Interface {
 		
 		$this->title = $view->place->title;
 		
-		$view->place = ORM::factory("place", 2);
-		
 		$view->hours = $hour->pretty_hour($view->place->hours->order_by("day_of_week", "asc")->order_by("close", "asc")->find_all());
 		
 		$this->template->view = $view;
