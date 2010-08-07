@@ -57,7 +57,13 @@ class Controller_Places extends Controller_Interface {
 		
 		$this->title = $view->place->title;
 		
-		$view->hours = $hour->pretty_hour($view->place->hours->order_by("day_of_week", "asc")->order_by("close", "asc")->find_all());
+		$view->hours = $hour->pretty_hour(
+			$view->place
+			->hours
+			->order_by("day_of_week", "asc")
+			->order_by("close", "asc")
+			->find_all()
+		);
 		
 		$this->template->view = $view;
 	}

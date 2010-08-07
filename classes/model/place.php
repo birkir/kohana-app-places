@@ -24,9 +24,8 @@ class Model_Place extends ORM {
 			'foreign_key' => 'place_id',
 			'far_key' => 'category_id'
 		),
-		'hours' => array(
-			
-		)
+		'hours' => array(),
+		'rating' => array()
 	);
 	
  	protected $_rules = array(

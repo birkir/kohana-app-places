@@ -25,7 +25,6 @@ body { font-family:Arial; font-size: 10px; background:#e8f3ff url(../img/backgro
 #page #head #shortcuts { position:absolute; top:18px; right:0; }
 #page #head #shortcuts ul li { float:left; margin:0 15px 0 0; }
 #frame { padding:10px 12px 10px 10px; }
-#frame ul li { width:100%; }
 #foot { background: url(../img/landscape.png) no-repeat 50% 0%; height:225px; width:100%; position:relative; }
 #foot.bottom { position:absolute; bottom:0; }
 div.clear { clear:both; }
@@ -48,20 +47,22 @@ div.clear { clear:both; }
 
 /** Menu list **/
 ul.menu { margin:0; }
+ul.menu li { width:100%; }
 ul.menu .i3 { height:12px; }
 ul.menu a { font-size:22px; line-height:11px; display:block; float:left; width:100%; margin:0; font-family:"Arial black"; font-weight:bold; text-transform:uppercase; text-decoration:none; color:#5988cc; }
 
 /** Basic list **/
 ul.list {}
-ul.list li {}
+ul.list li { width:100%; }
 ul.list li a {}
 
 /** Stars **/
-ul.stars {}
-ul.stars li {}
-ul.stars li a {}
-ul.stars li a.half {}
-ul.stars li a.empty {}
+ul.stars { float:right; margin:-10px 0 0 0; }
+ul.stars li { float:left; display:block; }
+ul.stars li a { cursor:default; background:url(../img/stars.png); text-decoration:none; font-size:0; display:block; float:left; width:16px; height:16px; }
+ul.stars li a.full { background-position:0 0; }
+ul.stars li a.half { background-position:-16px 0; }
+ul.stars li a.empty { background-position:-32px 0; }
 
 /** Errors */
 div.errors { background:pink; border:3px solid red; padding:10px; margin:0 0 15px 0; }
