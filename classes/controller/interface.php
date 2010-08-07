@@ -38,6 +38,7 @@ class Controller_Interface extends Controller {
 		$this->location->longitude = Cookie::get("lng", NULL);
 		View::set_global("location", $this->location);
 		
+		// Rounded corners
 		View::set_global("corner", array("start" => "<div class=\"bt\"><div></div></div><div class=\"i1\"><div class=\"i2\"><div class=\"i3\">", "end" => "</div></div></div><div class=\"bb\"><div></div></div>"));
 		
 	}
