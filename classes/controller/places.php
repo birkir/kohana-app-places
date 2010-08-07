@@ -3,7 +3,10 @@
 class Controller_Places extends Controller_Interface {
 
 	public $title = 'Places';
-
+	
+	/**
+	 * Find all categories order by index
+	**/
 	public function action_index()
 	{
 		$view = new View('smarty:home/default');
@@ -12,7 +15,17 @@ class Controller_Places extends Controller_Interface {
 		->order_by('index', 'ASC')
 		->find_all();
 		
+		$view->prefix = 'places/category/';
+		
 		$this->template->view = $view;
+	}
+	
+	/**
+	 * Find places by category
+	 */
+	public function action_category($category=NULL)
+	{
+		
 	}
 	
 	/**
