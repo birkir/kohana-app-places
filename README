@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY  (`category_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-CREATE TABLE IF NOT EXISTS `foods` (
+CREATE TABLE IF NOT EXISTS `food` (
   `food_id` int(11) NOT NULL auto_increment,
   `title` varchar(64) NOT NULL,
   `enabled` tinyint(1) NOT NULL default '1',
