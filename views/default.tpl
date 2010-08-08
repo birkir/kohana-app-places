@@ -22,13 +22,13 @@
 					</ul>
 				</div>
 				<script type='text/javascript'>
-					d.getElementById("_logo_img").style.width = 230*ratio + "px";
-					d.getElementById("_logo_img").style.height = 60*ratio + "px";
-					d.getElementById("_location_img").style.width = 64*ratio + "px";
-					d.getElementById("_location_img").style.height = 64*ratio + "px";
-					d.getElementById("_language_img").style.width = 64*ratio + "px";
-					d.getElementById("_language_img").style.height = 64*ratio + "px";
-					d.getElementById("head").style.height = 90*ratio + "px";
+					document.getElementById("_logo_img").style.width = 230*ratio + "px";
+					document.getElementById("_logo_img").style.height = 60*ratio + "px";
+					document.getElementById("_location_img").style.width = 64*ratio + "px";
+					document.getElementById("_location_img").style.height = 64*ratio + "px";
+					document.getElementById("_language_img").style.width = 64*ratio + "px";
+					document.getElementById("_language_img").style.height = 64*ratio + "px";
+					document.getElementById("head").style.height = 90*ratio + "px";
 				</script>
 			</div>
 			<div id="frame">
