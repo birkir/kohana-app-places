@@ -4,7 +4,7 @@
 		<meta charset=utf-8 />
 		<meta name="viewport" content="user-scalable=no, width=device-width" /> 
 		<title>{$title|__} | {$project->title}</title>
-		<link rel="shortcut icon" href="/resources/img/favicon.ico" />
+		<link rel="shortcut icon" href="/resources/img/favico.ico" />
 		<link type="text/css" href="/resources/css/style.main.css" rel="stylesheet" />
 	</head>
 	<body>
@@ -39,10 +39,9 @@
 		</div>
 		<div id="footoffset"></div>
 		<div id="foot"></div>
-	{if isset($js)}
-	<script type="text/javascript">
-{$js}
-	</script>
-	{/if}
+{if isset($js)}
+	<script type="text/javascript">{$js}</script>
+{/if}
+{if isset($profiler)}{$profiler}{/if}
 	</body>
 </html>
