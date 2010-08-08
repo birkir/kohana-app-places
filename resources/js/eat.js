@@ -9,6 +9,13 @@ if(w>480)
 {
 	ratio = 1;
 }
+d.getElementById("_logo_img").style.width = 230*ratio + "px";
+d.getElementById("_logo_img").style.height = 60*ratio + "px";
+d.getElementById("_location_img").style.width = 64*ratio + "px";
+d.getElementById("_location_img").style.height = 64*ratio + "px";
+d.getElementById("_language_img").style.width = 64*ratio + "px";
+d.getElementById("_language_img").style.height = 64*ratio + "px";
+d.getElementById("head").style.height = 90*ratio + "px";
 img_corners = new Image(10,10);
 img_corners.src="/resources/img/corners.png";
 img_borders = new Image(10,10);
