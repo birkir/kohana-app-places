@@ -9,7 +9,7 @@ class Controller_Places extends Controller_Interface {
 	**/
 	public function action_index()
 	{
-		$view = new View('smarty:home/default');
+		$view = new View('smarty:misc/menu');
 		
 		$view->menu = ORM::factory('category')
 		->order_by('index', 'ASC')
