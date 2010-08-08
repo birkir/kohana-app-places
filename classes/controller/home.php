@@ -19,7 +19,7 @@ class Controller_Home extends Controller_Interface {
 			),
 			(object) array(
 				"title" => "I want ...",
-				"alias" => "want"
+				"alias" => "food"
 			),
 			(object) array(
 				"title" => "What's close?",

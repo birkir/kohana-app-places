@@ -70,7 +70,7 @@ class Controller_Places extends Controller_Interface {
 	/**
 	 * Find places in neighborhood
 	 */
-	public function action_index()
+	public function action_neighborhood()
 	{
 		$place = new Model_Place();
 		
