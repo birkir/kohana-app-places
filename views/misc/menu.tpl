@@ -1,11 +1,11 @@
 			<div id="menu">
 				<ul class="menu">
 {foreach from=$menu item=item}
-					<li>
+					<li><a href="/{if isset($prefix)}{$prefix}{/if}{$item->alias}" title="{$item->title|__}">
 						<div class="cb">{$corner.start}
-							<a href="/{if isset($prefix)}{$prefix}{/if}{$item->alias}" title="{$item->title|__}"><ins>&nbsp;</ins>{$item->title|__}</a>
+							<ins>&nbsp;</ins>{$item->title|__}
 						{$corner.end}</div>
-					</li>
+					</a></li>
 {/foreach}
 				</ul>
 			</div>

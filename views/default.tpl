@@ -22,6 +22,9 @@
 					</ul>
 				</div>
 			</div>
+{if isset($js)}
+	<script type="text/javascript">{$js}</script>
+{/if}
 			<div id="frame">
 {if isset($view)}
 {$view}
@@ -30,9 +33,6 @@
 		</div>
 		<div id="footoffset"></div>
 		<div id="foot"></div>
-{if isset($js)}
-	<script type="text/javascript">{$js}</script>
-{/if}
 {if isset($profiler)}
 {$profiler}
 {/if}
