@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Want extends Controller_Interface {
+class Controller_Food extends Controller_Interface {
 
 	/**
 	 * List all food types

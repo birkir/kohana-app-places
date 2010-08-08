@@ -68,6 +68,20 @@ class Controller_Places extends Controller_Interface {
 	}
 	
 	/**
+	 * Find places in neighborhood
+	 */
+	public function action_index()
+	{
+		$place = new Model_Place();
+		
+		$this->template->view = new View('smarty:places/list');
+		
+		$distance = $place->select($place->near(Cookie::get("lat", 0), Cookie::get("lng", 0)));
+		
+		$this->template->view->places = $distance->order_by("distance", "ASC")->find_all();
+	}
+	
+	/**
 	 * Find places by food type
 	 */
 	public function action_food($food=NULL)
