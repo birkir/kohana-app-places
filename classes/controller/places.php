@@ -17,6 +17,8 @@ class Controller_Places extends Controller_Interface {
 		
 		$view->prefix = 'places/category/';
 		
+		$this->template->back = "";
+		
 		$this->template->view = $view;
 	}
 	
@@ -63,6 +65,8 @@ class Controller_Places extends Controller_Interface {
 		->where('enabled', '=', 1)
 		->where('removed', '=', 0)
 		->find_all();
+		
+		$this->template->back = "places";
 		
 		$this->template->view = $view;
 	}

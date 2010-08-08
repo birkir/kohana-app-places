@@ -26,6 +26,19 @@
 	<script type="text/javascript">{$js}</script>
 {/if}
 			<div id="frame">
+{if isset($back)}
+				<div id="goback">
+					<a href="/{$back}" title="Go back">
+						<div class="cb">{$corner.start}<p><span>&laquo;</span> Go back</p>{$corner.end}</div>
+					</a>
+				</div>
+				<div id="home">
+					<a href="/" title="Go home">
+						<div class="cb">{$corner.start}<p>Home</p>{$corner.end}</div>
+					</a>
+				</div>
+				<div class="clear"></div>
+{/if}
 {if isset($view)}
 {$view}
 {/if}

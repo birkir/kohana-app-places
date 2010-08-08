@@ -45,6 +45,16 @@ div.clear { clear:both; }
 .i2 { padding:0 12px 0 0; background-position:100% 0; }
 .i3 { position: relative; background:#ffffff; padding:0 10px; }
 
+/* Navigation system */
+#goback { float:left; width:55%; display:none; }
+#home { float:right; width:35%; display:none; }
+#goback, #home { text-align:center; font-size:20px; font-family:Arial black; font-weight:bold; }
+#goback a, #home a { color:#969696; text-decoration:none; text-transform:uppercase; }
+#goback a span { font-size:28px; }
+#goback p { line-height:0; }
+#home p  { line-height:2px; }
+#goback .i3, #home .i3 { height:5px; }
+
 /** Menu list **/
 ul.menu { margin:0; }
 ul.menu li { width:100%; }
