@@ -23,7 +23,7 @@ class Controller_Home extends Controller_Interface {
 			),
 			(object) array(
 				"title" => "What's close?",
-				"alias" => "neighborhood"
+				"alias" => "places/neighborhood"
 			)
 		);
 		

@@ -78,7 +78,7 @@ class Controller_Places extends Controller_Interface {
 		
 		$distance = $place->select($place->near(Cookie::get("lat", 0), Cookie::get("lng", 0)));
 		
-		$this->template->view->places = $distance->order_by("distance", "ASC")->find_all();
+		$this->template->view->items = $distance->order_by("distance", "ASC")->find_all();
 	}
 	
 	/**
