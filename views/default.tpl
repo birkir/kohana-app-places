@@ -6,7 +6,6 @@
 		<title>{$title|__} | {$project->title}</title>
 		<link rel="shortcut icon" href="/resources/img/favicon.ico" />
 		<link type="text/css" href="/resources/css/style.main.css" rel="stylesheet" />
-		<script type="text/javascript" src="/resources/js/eat.js"></script>
 	</head>
 	<body>
 		<div id="page">
@@ -40,5 +39,10 @@
 		</div>
 		<div id="footoffset"></div>
 		<div id="foot"></div>
+	{if isset($js)}
+	<script type="text/javascript">
+{$js}
+	</script>
+	{/if}
 	</body>
 </html>

@@ -11,6 +11,8 @@
  */
 class Controller_Admin extends Controller_Interface {
 	
+	public $title = 'Admin';
+	
 	public function action_index()
 	{
 		$user = new Model_User;

@@ -41,6 +41,9 @@ class Controller_Interface extends Controller {
 		// Rounded corners
 		View::set_global("corner", array("start" => "<div class=\"bt\"><div></div></div><div class=\"i1\"><div class=\"i2\"><div class=\"i3\">", "end" => "</div></div></div><div class=\"bb\"><div></div></div>"));
 		
+		// Fetch javascripters
+		$this->template->js = Minify::factory('js')->set(file_get_contents(APPPATH.'resources/js/eat.js'))->min();
+		
 	}
 	
 	public function after()
