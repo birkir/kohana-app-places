@@ -10,11 +10,34 @@
  */
 class Controller_Admin extends Controller {
 	
+	private $menu = array(
+		"places"     => "Places",
+		"food"       => "Food types",
+		"categories" => "Categories",
+		"users"      => "Users"
+	);
+	
 	public function before()
 	{
+		$this->template = new View('smarty:admin/default');
+		
+		$this->template->menu = $this->menu;
+		$this->template->controller = $this->request->controller;
+		
+		if (isset($_GET['profiler']))
+		{
+			$this->template->profiler = new View('profiler/stats');
+		}
 	}
-
+	
+	public function action_index()
+	{
+		
+	}
+	
 	public function after()
 	{
+		$this->template->title = isset($this->title) ? $this->title : NULL;
+		$this->request->response = $this->template;
 	}
 }
