@@ -38,10 +38,12 @@
 
 				// MAP
 **}
+{if isset($map)}
 				<div class="cb">{$corner.start}
 					<h3>{"Directions"|__}</h3>
 					<img src="{$map}" alt="MAP" />
 				{$corner.end}</div>
+{/if}
 {**
 
 				// DESCRIPTION
