@@ -145,6 +145,22 @@ class Controller_Places extends Controller_Interface {
 		
 		$this->template->view->items = $distance->order_by("distance", "ASC")->find_all();
 	}
+
+        /**
+         * List all food types
+        **/
+        public function action_food_types()
+        {
+                $view = new View('smarty:misc/menu');
+
+                $view->menu = ORM::factory('food')
+                ->order_by('title', 'ASC')
+                ->find_all();
+
+                $view->prefix = 'places/food/';
+
+                $this->template->view = $view;
+        }
 	
 	/**
 	 * Find places by food type
