@@ -1,4 +1,5 @@
 <ul class="places">
+{if $items->count() > 0}
 {foreach from=$items item=item}
 	<li>
 		<a href="/places/view/{if empty($item->alias)}{$item->place_id}{else}{$item->alias}{/if}" title="{$item->title}">
@@ -26,4 +27,9 @@
 		</a>
 	</li>
 {/foreach}
+{else}
+	<li><div class="cb">{$corner.start}
+		<span style="font-size:16px;">{"Nothing was found"|__}</span>
+	{$corner.end}</div></li>
+{/if}
 </ul>
