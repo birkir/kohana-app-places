@@ -49,7 +49,7 @@
 		// Display map
 		if (Cookie::get("lat", NULL))
 		{
-			$this->template->view->map = "http://maps.google.com/maps/api/staticmap?center=".Cookie::get("address")."&zoom=14&size=388x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|".Cookie::get("lat", NULL).",".Cookie::get("lng", NULL);
+			$this->template->view->map = "http://maps.google.com/maps/api/staticmap?center=".Cookie::get("address")."&zoom=14&size=410x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|".Cookie::get("lat", NULL).",".Cookie::get("lng", NULL);
 		}
 	}
 	
