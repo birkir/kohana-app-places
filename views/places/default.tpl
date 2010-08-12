@@ -41,7 +41,7 @@
 {if isset($map)}
 				<div class="cb">{$corner.start}
 					<h3>{"Directions"|__}</h3>
-					<a href="/places/directions/{if !empty($place->alias)}{else}{$place->place_id}{/if}" ><img src="{$map}" alt="{"Directions"|__}" /></a>
+					<a href="/places/directions/{if !empty($place->alias)}{else}{$place->place_id}{/if}" ><img src="{$map}" alt="{"Directions"|__}" style="width:100%;" /></a>
 				{$corner.end}</div>
 {/if}
 {**
