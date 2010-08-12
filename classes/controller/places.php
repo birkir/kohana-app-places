@@ -93,6 +93,25 @@ class Controller_Places extends Controller_Interface {
 	}
 	
 	/**
+	 * Get directions to place
+	 */
+	public function action_directions($place=NULL)
+	{
+		$view = new View('smarty:places/directions');
+		
+		$view->place = ORM::factory("place")
+		->where(is_numeric($place) ? 'place_id' : 'alias', '=', $place)
+		->where("enabled", "=", 1)
+		->where("removed", "=", 0)
+		->find();
+		
+		if (!$view->place->loaded())
+		{
+			throw new Kohana_Exception("Place not found");
+		}
+	}
+	
+	/**
 	 * Find places by category
 	 */
 	public function action_category($category=NULL)
