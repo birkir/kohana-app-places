@@ -52,6 +52,40 @@ class Controller_Places extends Controller_Interface {
 			->find_all()
 		);
 		
+		// Get directions
+		
+		$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=".urlencode($view->place->latitude.",".$view->place->longitude)."&sensor=false");
+		$res = json_decode($res);
+		
+		$origin = Cookie::get("address", NULL);
+		$destination = $res->results[0]->formatted_address;
+		
+		$res = file_get_contents("http://maps.google.com/maps/api/directions/json?origin=".urlencode($origin)."&destination=".urlencode($destination)."&sensor=false");
+		$res = json_decode($res);
+		
+		$text_directions = array();
+		$map_directions = "path=rgba:0x0000FF80,weight:5|";
+		$map_directions_start = array(
+			'lat' => $res->routes[0]->legs[0]->steps[0]->start_location->lat,
+			'lng' => $res->routes[0]->legs[0]->steps[0]->start_location->lng,
+		);
+		if ($res->status == "OK")
+		{
+			foreach($res->routes[0]->legs[0]->steps as $item)
+			{
+				$text_directions[] = $item->html_instructions;
+				$map_directions .= $item->start_location->lat.",".$item->start_location->lng."|";
+				$map_directions_stop = array(
+					'lat' => $item->start_location->lat,
+					'lng' => $item->start_location->lng,
+				);
+			}
+		}
+		$map_directions = "?markers=".$map_directions_start['lat'].",".$map_directions_start['lng'].",greena|".$map_directions_stop['lat'].",".$map_directions_stop['lng'].",greenb&".$map_directions;
+		$center_point_lat = ($map_directions_start['lat']+$map_directions_stop['lat'])/2;
+		$center_point_lng = ($map_directions_start['lng']+$map_directions_stop['lng'])/2;
+		$view->map = "http://maps.google.com/staticmap".$map_directions."&size=412x300&key=".$this->config['google']['maps']."&center=".$center_point_lat.",".$center_point_lng;
+		
 		$this->template->view = $view;
 	}
 	

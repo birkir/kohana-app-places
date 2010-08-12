@@ -40,7 +40,7 @@
 **}
 				<div class="cb">{$corner.start}
 					<h3>{"Directions"|__}</h3>
-					<img src="" alt="MAP" />
+					<img src="{$map}" alt="MAP" />
 				{$corner.end}</div>
 {**
 
