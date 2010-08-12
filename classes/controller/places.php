@@ -37,6 +37,11 @@ class Controller_Places extends Controller_Interface {
 		->where("removed", "=", 0)
 		->find();
 		
+		if (!$view->place->loaded())
+		{
+			throw new Kohana_Exception("Place not found");
+		}
+		
 		$this->title = $view->place->title;
 		
 		$view->hours = $hour->pretty_hour(
@@ -95,6 +100,11 @@ class Controller_Places extends Controller_Interface {
 		$food = ORM::factory('food')
 		->where(is_numeric($food) ? 'food_id' : 'alias', '=', $food)
 		->find();
+		
+		if (!$food->loaded())
+		{
+			throw new Kohana_Exception("Food not found");
+		}
 		
 		$view->items = $food->place
 		->where('enabled', '=', 1)
