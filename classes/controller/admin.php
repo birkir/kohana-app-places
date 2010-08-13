@@ -12,7 +12,7 @@ class Controller_Admin extends Controller {
 	
 	private $menu = array(
 		"places"     => "Places",
-		"food"       => "Food types",
+		"food"       => "Food",
 		"categories" => "Categories",
 		"users"      => "Users"
 	);

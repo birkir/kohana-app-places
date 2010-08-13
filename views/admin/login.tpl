@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js login">
 	<head>
 		<meta charset="utf-8">
 		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -20,33 +20,21 @@
 			<header>
 				<div class="wrap">
 					<div id="logo">Eat Admin</div>
-					<div id="menu">
-						<ul>
-{foreach from=$menu key=alias item=item}
-							<li{if $controller == $alias} class="current"{/if}><a href="/admin/{$alias}">{$item}</a></li>
-{/foreach}
-						</ul>
-					</div>
-					<div id="search">
-						<form method="get" action="">
-							<fieldset>
-								<input type="text" name="q" value="search..." class="prompt" />
-								<input type="submit" name="" value="Go" />
-							</fieldset>
-						</form>
-					</div>
-					<div id="user">
-						<div id="welcome">{"Welcome"|__}, <span></span></div>
-						<div id="shortcuts">
-							<a href="/admin/profile" title="{"Profile"|__}">{"Profile"|__}</a>
-							<span>&nbsp;|&nbsp;</span>
-							<a href="/admin/login/logout" title="{"Logout"|__}">{"Logout"|__}</a>
-						</div>
-					</div>
 				</div>
 			</header>
 			<div id="main" class="wrap">
-				
+				<div class="login"> 
+					<fieldset> 
+						<dl> 
+							<dt><label for="_login_username">{"Username"|__}</label></dt> 
+							<dd><input type="text" name="_u" value="" id="_login_username" /></dd> 
+							<dt><label for="_login_password">{"Password"|__}</label></dt> 
+							<dd><input type="password" name="_p" value="" id="_login_password" /></dd> 
+							<dt>&nbsp;</dt> 
+							<dd><button id="start">{"Login"|__}</button></dd> 
+						</dl> 
+					</fieldset> 
+				</div> 
 			</div>
 			<footer>
 			</footer>

@@ -195,19 +195,127 @@ button {  width: auto; overflow: visible; }
 
 
 
+/* Primary Styles
+	Author: Birkir R Gudjonsson
+*/
+dl dt { clear:both; display:block; float:left; min-width:110px; margin:0 0 0.5em 0; padding:0.1em 0 0 0; }
+dl dd { float:none; display:block; margin:0 0 0.5em 0; }
+input, select, textarea, button { font-size: 10px; line-height: 10px; }
+select { padding: 2px; }
+input[type='text'], input[type='password'] { font-size:13px; line-height:normal; border:1px solid #bcbdbe; border-top-color:#a2a3a4; border-bottom-color:#d2d3d4; background:#ffffff; padding:1px 2px; outline:none; margin:0 0 6px 0; }
+input[type='text']:focus, textarea:focus, textarea.focus, input[type='password']:focus, input.focus { border-color:#85D05C; border-top-color:#73B450; border-bottom-color:#8ADF5C; outline: none; }
+input[type='text'].small, input[type='password'].small { font-size:11px; height:16px; }
+input[type='text'].prompted, input[type='password'].promted { color:#999; padding:1px 2px; }
+textarea { font-size:13px; line-height:normal; border:1px solid #bcbdbe; border-top-color:#a2a3a4; border-bottom-color:#d2d3d4; background:#ffffff; margin:0; padding:1px 2px; outline:none; margin:0 0 6px 0; }
+textarea.small { font-size:11px; }
+a.button, input.button, button { font-size:11px; color:#222222; border:1px solid #acacac; background:#f9f9f9; text-align:center; text-decoration:none; padding:4px 12px; cursor:default !important; margin:0; }
+a.button:focus, input.button:focus { border-color:#9AD27B; border-right:1px solid #999999; }
+a.button:hover, input.button:hover, button { text-decoration:none; }
+a.button { display:inline-block; }
+a.button, input.button, button { border:1px solid #cdcdcd; border-bottom:1px solid #999999; background:#ededed; }
+a.button:active, input.button:active, button:active { background:#c7c7c7; border:1px solid #c7c7c7; border-bottom:1px solid #a1a1a1 !important; border-right:1px solid #a6a6a6 !important; }
+a.button.disabled, input[disabled='disabled'], button.disabled { border:1px solid #cdcdcd !important; border-bottom:1px solid #999999 !important; background: #ededed !important; }
+.wrap { position:relative; width:780px; margin:0 auto; }
 
- /* Primary Styles
-    Author: Birkir R Gudjonsson
+header { position:relative; background:#a7d950; }
+
+header div.wrap { height:90px; }
+
+header #logo { font-family:"Arial Black"; font-size:36px; text-transform:uppercase; color:#ffffff; opacity:0.95; }
+
+header #menu { position:absolute; bottom:0; left:0; }
+header #menu ul { list-style:none; margin:0; }
+header #menu ul li { float:left; margin:0 4px 0 0; }
+header #menu ul li a { float:left; padding:5px; width:80px; color:#ffffff; line-height:18px; font-size:12px; text-decoration:none; text-align:center; font-weight:bold; }
+header #menu ul li:hover a { background:rgba(0,0,0,0.02); }
+header #menu ul li.current a { background:#fff; color:#888;  }
+
+header #search { position:absolute; top:10px; right:0; }
+header #search input[type='text'] { float:left; border:none; color: #999999; font-family:Arial; font-size:11px; padding:1px 4px 2px 4px; }
+header #search input[type='submit'] { float:left; border:none; background:none; font-family:Arial; font-size:12px; color:#ffffff; text-transform:uppercase; font-weight:bold; cursor:pointer; margin:0; padding:2px 0 2px 8px; }
+
+header #user { position:absolute; bottom:10px; right:0; text-align:right; font-size:12px; color:#ffffff; }
+header #user #welcome span { font-size:11px; }
+header #user #shortcuts { margin:3px 0 0; }
+header #user #shortcuts span { opacity:0.5; }
+header #user #shortcuts a { font-weight:bold; color:#ffffff; text-decoration:none; }
+header #user #shortcuts a:hover { text-decoration:underline; }
+
+
+
+/* Login Styles
+*/
+.login header { width:100%; }
+.login header div.wrap { height:340px; }
+.login header #logo { position:absolute; bottom:10px; left:50%; margin-left:-100px; }
+.login #main div.wrap { display:none; }
+.login #main div.login { width:300px; margin:30px auto 0 auto; padding-right:113px; }
+
+
+/**
+ * CSS3 styles
  */
+input[type='text'],
+textarea,
+input[type='password'] {
+	box-shadow:inset 0 1px #dedede;
+	-moz-box-shadow:inset 0 1px #dedede;
+	-webkit-box-shadow:inset 0 1px #dedede;
+}
+input[type='text']:focus {
+	box-shadow:inset 0 1px #d3ddcd;
+	-moz-box-shadow:inset 0 1px #d3ddcd;
+	-webkit-box-shadow:inset 0 1px #d3ddcd;
+}
 
+/* buttons */
+a.button,
+input.button,
+button {
+	background: -webkit-gradient(linear,left top,left bottom,from(#f1f1f1),to(#dfdfdf));
+	background: -moz-linear-gradient(top,#f1f1f1,#dfdfdf);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1',endColorstr='#dfdfdf');
+}
 
-
-
-
-
-
-
-
+a.button:active,
+input.button:active,
+button:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#c9c9c9));
+	background: -moz-linear-gradient(top,#e1e1e1,#f9f9f9);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1e1e1',endColorstr='#f9f9f9');
+}
+a.button.disabled,
+input[disabled='disabled'],
+button.disabled {
+	opacity:0.35;
+	-webkit-opacity:0.35;
+	-moz-opacity:0.35;
+	filter: alpha(opacity=35);
+	background: -webkit-gradient(linear,left top,left bottom,from(#f1f1f1),to(#dfdfdf)) !important;
+	background: -moz-linear-gradient(top,#f1f1f1,#dfdfdf) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1',endColorstr='#dfdfdf') !important;
+}
+header {
+	background:-webkit-gradient(linear,left top,left bottom,from(#afe454),to(#9bc94b));
+	background:-moz-linear-gradient(#afe454 0%, #9bc94b 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#afe454',endColorstr='#9bc94b');
+}
+header #logo {
+	text-shadow: rgba(0,0,0,0.08) 1px 1px 0;
+}
+header #menu ul li a {
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+}
+header #search input[type='text'] {
+	-webkit-box-shadow:-1px -1px rgba(0,0,0,0.08) !important;
+	-webkit-border-radius:2px;
+}
+header #user #shortcuts {
+	text-shadow: rgba(0,0,0,0.08) 1px 1px 0;
+}
 
 
 /* 
