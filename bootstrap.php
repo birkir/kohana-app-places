@@ -68,12 +68,13 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-		'database'		 => MODPATH.'database',		// Database access
-		'pagination'	 => MODPATH.'pagination',	// Paging of results
-		'userguide'		 => MODPATH.'userguide',	// User guide and API documentation
-		'orm'			 => MODPATH.'orm',			// Object Relationship Mapping
-		'smarty'		 => MODPATH.'smarty',		// Smarty template engine
-		'minify'		 => MODPATH.'minify'		// Minify module
+		'auth'			=> MODPATH.'auth',			// Authentication
+		'database'		=> MODPATH.'database',		// Database access
+		'pagination'	=> MODPATH.'pagination',	// Paging of results
+		'userguide'		=> MODPATH.'userguide',		// User guide and API documentation
+		'orm'				=> MODPATH.'orm',				// Object Relationship Mapping
+		'smarty'			=> MODPATH.'smarty',			// Smarty template engine
+		'minify'			=> MODPATH.'minify'			// Minify module
 	));
 
 /**
