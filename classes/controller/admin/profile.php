@@ -8,7 +8,7 @@
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Controller_Admin_Places extends Controller_Admin {
+class Controller_Admin_Profile extends Controller_Admin {
 	
 	public $title = "Profile";
 	
