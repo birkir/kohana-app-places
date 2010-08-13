@@ -46,7 +46,7 @@
 				</div>
 			</header>
 			<div id="main" class="wrap">
-				{$view}
+{if isset($view)}{$view}{/if}
 			</div>
 			<footer>
 			</footer>
