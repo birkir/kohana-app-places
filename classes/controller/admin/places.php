@@ -10,6 +10,7 @@
  */
 class Controller_Admin_Places extends Controller_Admin {
 
+        public $title = "Places";
         private $place;
         
         public function before()
