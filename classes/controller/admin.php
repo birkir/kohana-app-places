@@ -17,9 +17,11 @@ class Controller_Admin extends Controller {
 		"users"      => "Users"
 	);
 	
+	public $user;
+	
 	public function before()
 	{
-		$user = ORM::factory('user');
+		$this->user = ORM::factory('user');
 		
 		$this->template = new View('smarty:admin/default');
 		
@@ -27,7 +29,7 @@ class Controller_Admin extends Controller {
 		
 		$this->template->controller = $this->request->controller;
 		
-		if ($this->request->controller != 'login' AND !$user->logged_in())
+		if ($this->request->controller != 'login' AND !$this->user->logged_in())
 		{
 			$this->request->redirect('admin/login');
 		}

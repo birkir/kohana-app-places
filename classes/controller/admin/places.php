@@ -11,7 +11,7 @@
 class Controller_Admin_Places extends Controller_Admin {
 
         public $title = "Places";
-        private $place;
+        private $place, $view;
         
         public function before()
         {
@@ -26,13 +26,13 @@ class Controller_Admin_Places extends Controller_Admin {
         
         public function action_list()
         {
-                $view = new View('smarty:admin/list');
-                $view->items = $this->place->find_all();
-                $this->template->view = $view;
+                $this->view = new View('smarty:admin/list');
+                $this->view->items = $this->place->find_all();
         }
         
         public function action_new()
         {
+                $this->view = new View('smarty:admin/places');
                 
         }
         
@@ -45,5 +45,10 @@ class Controller_Admin_Places extends Controller_Admin {
         {
                 
         }
-
+        
+        public function after()
+        {
+                parent::after();
+                $this->template->view = $this->view;
+        }
 }
