@@ -8,48 +8,40 @@
  * @author     Birkir R Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Model_User extends ORM {
+class Model_User extends Model_Auth_User {
 	
 	protected $_primary_key = 'user_id';
-	protected $_primary_val = 'name';
 	
- 	protected $_rules = array(
-		'name' => array(
-			'not_empty' => NULL
-		)
-	);
+	/**
+	 * Log in with (username/email) and password
+	 *
+	 * @param	string	User login username/email
+	 * @param	string	User login password
+	 * @param	int		Cookie lifetime in seconds
+	 * @return	bool
+	 */
+	public function login($login=NULL, $password=NULL, $lifetime=86400)
+	{
+		
+	}
 	
+	/**
+	 * Logout, delete cookie and redirect
+	 */
+	public function logout()
+	{
+		
+	}
+	
+	/**
+	 * Check if user is logged in and get user details while at it.
+	 *
+	 * @return	bool/object
+	 */
 	public function logged_in()
 	{
-		if (Cookie::get('user_id', FALSE))
-		{
-			$user = $this->where('user_id', '=', Cookie::get('user_id', 0))->find();
-			
-			if ($user->loaded())
-			{
-				return TRUE;
-			}
-			else
-			{
-				Cookie::delete('user_id');
-			}
-		}
 		
-		return FALSE;
 	}
 	
-	public function login($email=NULL,$password=NULL)
-	{
-		$user = $this->where('email', '=', $email)
-		->where('password', '=', $password)
-		->find();
-		
-		if ($user->loaded())
-		{
-			return TRUE;
-		}
-		
-		return FALSE;
-	}
 	
 }

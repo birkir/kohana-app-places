@@ -23,18 +23,20 @@
 				</div>
 			</header>
 			<div id="main" class="wrap">
-				<div class="login"> 
-					<fieldset> 
-						<dl> 
-							<dt><label for="_login_username">{"Username"|__}</label></dt> 
-							<dd><input type="text" name="_u" value="" id="_login_username" /></dd> 
-							<dt><label for="_login_password">{"Password"|__}</label></dt> 
-							<dd><input type="password" name="_p" value="" id="_login_password" /></dd> 
-							<dt>&nbsp;</dt> 
-							<dd><button id="start">{"Login"|__}</button></dd> 
-						</dl> 
-					</fieldset> 
-				</div> 
+				<div class="login">
+					<form method="post" action="/admin/login">
+						<fieldset>
+							<dl>
+								<dt><label for="_login_username">{"Username"|__}</label></dt>
+								<dd><input type="text" name="_u" value="" id="_login_username" /></dd>
+								<dt><label for="_login_password">{"Password"|__}</label></dt>
+								<dd><input type="password" name="_p" value="" id="_login_password" /></dd>
+								<dt>&nbsp;</dt>
+								<dd><button id="start">{"Login"|__}</button></dd>
+							</dl>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 			<footer>
 			</footer>

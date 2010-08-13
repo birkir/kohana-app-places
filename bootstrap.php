@@ -68,7 +68,6 @@ Kohana::$config->attach(new Kohana_Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-		'auth'			=> MODPATH.'auth',			// Authentication
 		'database'		=> MODPATH.'database',		// Database access
 		'pagination'	=> MODPATH.'pagination',	// Paging of results
 		'userguide'		=> MODPATH.'userguide',		// User guide and API documentation
