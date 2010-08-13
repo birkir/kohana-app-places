@@ -30,7 +30,7 @@ class Controller_Language extends Controller_Interface {
 	 */
 	public function action_index()
 	{
-		$view = new View('smarty:language/default');
+		$view = new View('smarty:language');
 		
 		$view->languages = (object) $this->languages;
 		

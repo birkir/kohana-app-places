@@ -9,7 +9,8 @@
  * @category   Controller
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
- */class Controller_Location extends Controller_Interface {
+ */
+class Controller_Location extends Controller_Interface {
 	
 	public $title = 'Location';
 
@@ -20,7 +21,7 @@
 	 */	
 	public function action_index()
 	{
-		$this->template->view = new View('smarty:location/default');
+		$this->template->view = new View('smarty:location');
 		
 		if (isset($_REQUEST['location']))
 		{
@@ -78,4 +79,5 @@
 		
 		die(json_encode(array("status" => "BAD")));
 	}
-	}
+	
+}
