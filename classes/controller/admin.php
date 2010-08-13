@@ -4,7 +4,7 @@
  * Admin controller handles template for admin interface
  *
  * @package    Eat.is
- * @category   Controller
+ * @category   Admin
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
