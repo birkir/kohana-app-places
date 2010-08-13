@@ -10,13 +10,15 @@
  */
 class Controller_Admin_Login extends Controller_Admin {
 
-        public function action_index()
-        {
-        }
-        
-        public function action_logout()
-        {
-        }
+	public function action_index()
+	{
+		$this->template = new View('smarty:admin/login');
+	}
+	
+	public function action_logout()
+	{
+		
+	}
 
 }
 

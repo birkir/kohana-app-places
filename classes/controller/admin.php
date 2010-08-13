@@ -19,10 +19,18 @@ class Controller_Admin extends Controller {
 	
 	public function before()
 	{
+		$user = ORM::factory('user');
+		
 		$this->template = new View('smarty:admin/default');
 		
 		$this->template->menu = $this->menu;
+		
 		$this->template->controller = $this->request->controller;
+		
+		if ($this->request->controller != 'login' AND !$user->logged_in())
+		{
+			$this->request->redirect('admin/login');
+		}
 		
 		if (isset($_GET['profiler']))
 		{
