@@ -8,7 +8,7 @@
  * @author     Birkir R Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Model_User extends Model_Auth_User {
+class Model_User extends ORM {
 	
 	protected $_primary_key = 'user_id';
 	
