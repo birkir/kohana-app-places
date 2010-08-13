@@ -56,6 +56,8 @@ class Model_User extends ORM {
 		'email'					=> array('email_available'),
 	);
 	
+	private $user;
+	
 	public function validate_create(& $array) 
 	{
 		$array = Validate::factory($array)
@@ -219,7 +221,7 @@ class Model_User extends ORM {
 		{
 			if ($encrypt->decode($user->password) == $password)
 			{
-				Cookie::set('login', json_encode($user), time() + $lifetime);
+				Cookie::set('login', $user->user_id, time() + $lifetime);
 				
 				return TRUE;
 			}
@@ -233,7 +235,9 @@ class Model_User extends ORM {
 	 */
 	public function logout()
 	{
-		Cooke::delete('login');
+		Cookie::delete('login');
+		
+		return TRUE;
 	}
 	
 	/**
@@ -246,11 +250,11 @@ class Model_User extends ORM {
 	{
 		$encrypt = Encrypt::instance('default');
 		
-		$user = json_decode(Cookie::get('login', FALSE));
+		$user_id = Cookie::get('login', FALSE);
 		
-		if ( ! isset($this->user) AND $user)
+		if ( ! isset($this->user) AND $user_id)
 		{
-			$user = ORM::factory('user', $user->id);
+			$user = ORM::factory('user', $user_id);
 			
 			$this->user = $user
 			->where('enabled', '=', 1)
@@ -258,7 +262,7 @@ class Model_User extends ORM {
 			->find();
 		}
 		
-		if ($user AND $this->user->loaded())
+		if ($user_id AND $this->user->loaded())
 		{
 			if ($encrypt->decode($this->user->password) == $encrypt->decode($user->password))
 			{
