@@ -26,6 +26,13 @@ class Controller_Resources extends Controller {
 	public function action_js($file='')
 	{
 		$file = APPPATH.$this->_directory.$this->request->action."/".$file;
+		
+		if (substr($file,-7) == '.min.js')
+		{
+			$this->passthru($file, false);
+			return false;
+		}
+		
 		$file = $this->minify($file, "js");
 		$file = $this->gzip($file);
 		$this->passthru($file, true);

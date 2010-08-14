@@ -17,6 +17,7 @@ class Controller_Admin extends Controller {
 		"users"      => "Users"
 	);
 	
+	public $json = FALSE;
 	public $user;
 	
 	public function before()
@@ -47,7 +48,10 @@ class Controller_Admin extends Controller {
 	
 	public function after()
 	{
-		$this->template->title = isset($this->title) ? $this->title : NULL;
-		$this->request->response = $this->template;
+		if ($this->json == FALSE)
+		{
+			$this->template->title = isset($this->title) ? $this->title : NULL;
+			$this->request->response = $this->template;
+		}
 	}
 }

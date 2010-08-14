@@ -35,16 +35,17 @@ class Model_Place extends ORM {
 		'website' => array(),
 		'email' => array(),
 		'phone' => array(),
-		'price_from' => array(),
-		'price_to' => array(),
+		'price_from' => array(
+			'not_empty' => NULL
+		),
+		'price_to' => array(
+			'not_empty' => NULL
+		),
 		'description' => array(),
 		'street_name' => array(
 			'not_empty' => NULL
 		),
 		'street_number' => array(),
-		'city' => array(
-			'not_empty' => NULL
-		),
 		'zip' => array(
 			'not_empty' => NULL,
 			'digit' => NULL
