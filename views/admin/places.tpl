@@ -23,6 +23,8 @@
 				<dl>
 					<dt><label for="_place_title">Title</label></dt>
 						<dd><input type="text" name="title" value="{$place->title}" id="_place_title" size="80" /></dd>
+					<dt><label for="_place_alias">Alias</label></dt>
+						<dd><input type="text" name="alias" value="{$place->alias}" id="_place_alias" size="80" /></dd>
 					<dt><label for="_place_street_name">Address</label></dt>
 						<dd>
 							<input type="text" name="street_name" value="{$place->street_name}" id="_place_street_name" size="60" />

@@ -15,10 +15,17 @@ $(document).ready(function(){
 	{
 		return val.split(/,\s*/);
 	}
+	
 	function extractLast(term)
 	{
 		return split(term).pop();
 	}
+	
+	$(".ui-table tbody tr").click(function(){
+		var i = (window.location+"").indexOf("?", 0);
+		var url = (window.location+"").substr(0, i);
+		window.location = url+"/edit/"+$(this).attr("data-id");
+	});
 	
 	$("#_place_food").autocomplete({
 		source: function(request, response) {

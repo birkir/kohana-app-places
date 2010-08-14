@@ -11,7 +11,7 @@
 class Controller_Admin_Places extends Controller_Admin {
 	
 	public $title = "Places";
-	private $place, $view;
+	public $place, $view;
 	
 	public function before()
 	{
@@ -21,13 +21,30 @@ class Controller_Admin_Places extends Controller_Admin {
 	
 	public function action_index()
 	{
-		$this->template = Request::factory('admin/places/list')->execute()->response;
-	}
-	
-	public function action_list()
-	{
 		$this->view = new View('smarty:admin/list');
-		$this->view->items = $this->place->find_all();
+		
+		$this->view->fields = array(
+			'alias' => 'Alias',
+			'street_name' => 'Street name',
+			'street_number' => 'No.',
+			'zip' => 'Zip code'
+		);
+		
+		$count = $this->place->where('removed', '=', 0)->find_all()->count();
+		
+		$this->view->pagination = Pagination::factory(array(
+			'view'           => 'admin/pagination',
+			'total_items'    => $count,
+			'items_per_page' => $this->items_per_page,
+		));
+		
+		$this->view->controller = Inflector::singular($this->request->controller);
+		
+		$this->view->items = $this->place
+		->order_by('place_id', 'ASC')
+		->limit($this->view->pagination->items_per_page)
+		->offset($this->view->pagination->offset)
+		->find_all();
 	}
 	
 	public function action_new()

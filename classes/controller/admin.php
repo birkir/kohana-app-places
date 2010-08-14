@@ -19,6 +19,7 @@ class Controller_Admin extends Controller {
 	
 	public $json = FALSE;
 	public $user;
+	public $items_per_page = 5;
 	
 	public function before()
 	{
