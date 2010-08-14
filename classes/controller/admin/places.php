@@ -44,7 +44,7 @@ class Controller_Admin_Places extends Controller_Admin {
 		$this->view->place = ORM::factory('place', $id);
 		$this->view->zips = $this->zips();
 		$this->view->days = $this->days();
-		
+		$this->view->title = $this->view->place->title;
 		// get all food the place has
 		$food = array();
 		foreach ($this->view->place->foods->find_all() as $item)
@@ -149,7 +149,15 @@ class Controller_Admin_Places extends Controller_Admin {
 			else
 			{
 				$this->view->errors = $place->validate()->errors('place');
-				print_r($this->view->errors);
+				$this->view->place = (object) array(
+					'place_id' => $place->place_id,
+					'hours' => $this->view->place->hours
+				);
+				
+				foreach($_POST as $key => $val)
+				{
+					$this->view->place->$key = $val;
+				}
 			}
 		}
 	}

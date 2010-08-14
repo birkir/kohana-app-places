@@ -1,4 +1,15 @@
-<h2>{if $place->place_id}Edit "{$place->title}"{else}New place{/if} <a class="back" href="/admin/places">Cancel</a></h2>
+<h2>{if $place->place_id}Edit "{$title}"{else}New place{/if} <a class="back" href="/admin/places">Cancel</a></h2>
+{if isset($errors)}
+<div id="errors">
+	<h6>You have the following errors:</h6>
+	<ul>
+{foreach from=$errors item=item}
+		<li>{$item|__|ucfirst}</li>
+{/foreach}
+	</ul>
+	<br />
+</div>
+{/if}
 <form method="post" action="">
 	<div id="place" class="ui-tabs">
 		<ul class="ui-tabs-nav">
