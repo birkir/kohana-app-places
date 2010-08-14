@@ -5,7 +5,11 @@
  */
 $(document).ready(function(){
 	
-	$(".ui-tabs").tabs();
+	$(".ui-tabs").tabs({
+		cookie: {
+				expires: 1
+			}
+	});
 	
 	function split(val)
 	{

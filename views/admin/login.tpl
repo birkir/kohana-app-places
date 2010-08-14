@@ -25,7 +25,7 @@
 			<div id="main" class="wrap">
 				<div class="login">
 					<form method="post" action="/admin/login">
-						<fieldset>
+						<fieldset style="padding:0;">
 							<dl>
 								<dt><label for="_login_username">{"Username"|__}</label></dt>
 								<dd><input type="text" name="_u" value="" id="_login_username" /></dd>

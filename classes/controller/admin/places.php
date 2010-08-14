@@ -70,6 +70,7 @@ class Controller_Admin_Places extends Controller_Admin {
 			{
 				$place->save();
 				
+				// parse foods
 				$foods = array();
 				foreach (explode(',', $_POST['food']) as $item)
 				{
@@ -87,6 +88,7 @@ class Controller_Admin_Places extends Controller_Admin {
 				}
 				$del = $del->where('place_id', '=', $place->place_id)->execute();
 				
+				// parse categories
 				$categories = array();
 				foreach (explode(',', $_POST['categories']) as $item)
 				{
@@ -103,6 +105,43 @@ class Controller_Admin_Places extends Controller_Admin {
 					$del = $del->where('category_id', '!=', $c);
 				}
 				$del = $del->where('place_id', '=', $place->place_id)->execute();
+				
+				// parse hours
+				$hours = array();
+				if (isset($_POST['hour']))
+				{
+					foreach($_POST['hour'] as $hour_id => $item)
+					{
+						$hours[] = $hour_id;
+						$hour = ORM::factory('hour', $hour_id);
+						$hour->open = str_replace(':', '', $item['open']);
+						$hour->close = str_replace(':', '', $item['close']);
+						$hour->day_of_week = $item['day'];
+						$hour->save();
+					}
+				}
+				$del = DB::delete('hours');
+				foreach ($hours as $h)
+				{
+					$del = $del->where('hour_id', '!=', $h);
+				}
+				$del = $del->where('place_id', '=', $place->place_id)
+				->execute();
+				
+				// add new hours
+				if (isset($_POST['new_hour']))
+				{
+					$_h = $_POST['new_hour'];
+					foreach($_h['day'] as $k => $item)
+					{
+						$hour = ORM::factory('hour');
+						$hour->open = str_replace(':', '', $_h['open'][$k]);
+						$hour->close = str_replace(':', '', $_h['close'][$k]);
+						$hour->day_of_week = str_replace(':', '', $_h['day'][$k]);
+						$hour->place_id = $place->place_id;
+						$hour->save();
+					}
+				}
 				
 				$this->request->redirect('/admin/places/edit/'.$place->place_id);
 				

@@ -2,6 +2,7 @@
 
 class Controller_Resources extends Controller {
 
+	private $cache = TRUE;
 	protected $_directory = "resources/";
 
 	public function action_index()
@@ -29,7 +30,8 @@ class Controller_Resources extends Controller {
 		
 		if (substr($file,-7) == '.min.js')
 		{
-			$this->passthru($file, false);
+			$file = $this->gzip($file);
+			$this->passthru($file, true);
 			return false;
 		}
 		
@@ -75,7 +77,7 @@ class Controller_Resources extends Controller {
 		$this->request->headers['Last-Modified']  = date('r', filemtime($file));
 		
 		
-		if (isset($cache))
+		if ($this->cache == TRUE)
 		{
 			$this->request->headers['Cache-Control'] = 'must-revalidate';
 			$this->request->headers['Expires'] = gmdate("D, d M Y H:i:s", time() + 86400).' GMT';
