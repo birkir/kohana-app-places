@@ -48,7 +48,7 @@ class Controller_Admin extends Controller {
 	
 	public function action_index()
 	{
-		
+		$this->template = Request::factory('admin/places')->execute()->response;
 	}
 	
 	public function after()
