@@ -50,9 +50,63 @@ class Controller_Admin_Places extends Controller_Admin {
 	public function action_new()
 	{
 		$this->view = new View('smarty:admin/places');
-		$this->view->place = ORM::factory('place', 0);
+		$this->view->place = ORM::factory('place');
 		$this->view->zips = $this->zips();
 		$this->view->days = $this->days();
+		
+		if ($_POST)
+		{
+			$p = $_POST;
+			
+			if ($this->view->place->values($_POST)->check())
+			{
+				$place_id = $this->view->place->save();
+				
+				// parse foods
+				foreach (explode(',', $_POST['food']) as $item)
+				{
+					$food = ORM::factory('food')->where('title', '=', trim($item))->find();
+					
+					if ($food->loaded() AND !$this->view->place->has('foods', $food))
+					{
+						$this->view->place->add('foods', $food);
+					}
+				}
+				
+				// parse categories
+				foreach (explode(',', $_POST['categories']) as $item)
+				{
+					$category = ORM::factory('category')->where('title', '=', trim($item))->find();
+					
+					if ($category->loaded() AND !$this->view->place->has('categories', $category))
+					{
+						$this->view->place->add('categories', $category);
+					}
+				}
+				
+				// parse hours
+				if (isset($_POST['new_hour']))
+				{
+					$_h = $_POST['new_hour'];
+					foreach($_h['day'] as $k => $item)
+					{
+						$hour = ORM::factory('hour');
+						$hour->open = str_replace(':', '', $_h['open'][$k]);
+						$hour->close = str_replace(':', '', $_h['close'][$k]);
+						$hour->day_of_week = str_replace(':', '', $_h['day'][$k]);
+						$hour->place_id = $place_id;
+						$hour->save();
+					}
+				}
+				
+			}
+			else
+			{
+				$this->view->errors = $this->view->place->validate()->errors('place');
+				$this->view->place = (object) $p;
+				$this->view->place->place_id = NULL;
+			}
+		}
 	}
 	
 	public function action_edit($id=0)

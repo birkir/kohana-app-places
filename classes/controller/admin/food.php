@@ -44,6 +44,46 @@ class Controller_Admin_Food extends Controller_Admin {
 		->find_all();
 	}
 	
+	public function action_edit($id=0)
+	{
+		$this->view = new View('smarty:admin/food');
+		$this->view->food = ORM::factory('food', $id);
+		
+		if ($_POST)
+		{
+			if ($this->view->food->values($_POST)->check())
+			{
+				$this->view->food->save();
+			}
+			else
+			{
+				$this->view->errors = $this->view->food->validate()->errors('food');
+				$_POST['food_id'] = $this->view->food->food_id;
+				$this->view->food = (object) $_POST;
+			}
+		}
+	}
+	
+	public function action_new()
+	{
+		$this->view = new View('smarty:admin/food');
+		$this->view->food = ORM::factory('food');
+		
+		if ($_POST)
+		{
+			if ($this->view->food->values($_POST)->check())
+			{
+				$this->view->food->save();
+			}
+			else
+			{
+				$this->view->errors = $this->view->food->validate()->errors('food');
+				$_POST['food_id'] = $this->view->food->food_id;
+				$this->view->food = (object) $_POST;
+			}
+		}
+	}
+	
 	public function after()
 	{
 		parent::after();

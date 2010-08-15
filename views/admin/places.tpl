@@ -1,4 +1,4 @@
-<h2>{if $place->place_id}Edit "{$title}"{else}New place{/if} <a class="back" href="/admin/places">Cancel</a></h2>
+<h2>{if $place->place_id}Edit place{else}New place{/if} <a class="back" href="/admin/places">Cancel</a></h2>
 {if isset($errors)}
 <div id="errors">
 	<h6>You have the following errors:</h6>
@@ -71,6 +71,7 @@
 		<div id="place-hours" class="ui-tabs-hide">
 			<fieldset>
 				<dl>
+{if isset($place->hours)}
 {foreach from=$place->hours->find_all() key=key item=item}
 					<dt><input type="button" class="button _remove_hour_row" value="Remove row" /></dt>
 					<dd>
@@ -85,6 +86,7 @@
 						<input type="text" name="hour[{$item->hour_id}][close]" value="{$item->close|str_pad:4:"0":STR_PAD_LEFT|substr:0:2}:{$item->close|str_pad:4:"0":STR_PAD_LEFT|substr:2}" id="_place_hour_{$item->hour_id}_close" size="18" />
 					</dd>
 {/foreach}
+{/if}
 				</dl>
 				<input class="button" type="button" id="_add_hour_row" value="Add row" />
 			</fieldset>

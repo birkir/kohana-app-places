@@ -44,6 +44,46 @@ class Controller_Admin_Categories extends Controller_Admin {
 		->find_all();
 	}
 	
+	public function action_edit($id=0)
+	{
+		$this->view = new View('smarty:admin/categories');
+		$this->view->category = ORM::factory('category', $id);
+		
+		if ($_POST)
+		{
+			if ($this->view->category->values($_POST)->check())
+			{
+				$this->view->category->save();
+			}
+			else
+			{
+				$this->view->errors = $this->view->category->validate()->errors('category');
+				$_POST['category_id'] = $this->view->category->category_id;
+				$this->view->category = (object) $_POST;
+			}
+		}
+	}
+	
+	public function action_new()
+	{
+		$this->view = new View('smarty:admin/categories');
+		$this->view->category = ORM::factory('category');
+		
+		if ($_POST)
+		{
+			if ($this->view->category->values($_POST)->check())
+			{
+				$this->view->category->save();
+			}
+			else
+			{
+				$this->view->errors = $this->view->category->validate()->errors('category');
+				$_POST['category_id'] = $this->view->category->category_id;
+				$this->view->category = (object) $_POST;
+			}
+		}
+	}
+	
 	public function after()
 	{
 		parent::after();
