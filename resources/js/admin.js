@@ -25,6 +25,13 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".check_all").click(function(){
+		$(this).parent("fieldset").find("table input").attr("checked", "checked");
+	});
+	$(".check_none").click(function(){
+		$(this).parent("fieldset").find("table input").attr("checked", "");
+	});
+	
 	function split(val)
 	{
 		return val.split(/,\s*/);
@@ -42,7 +49,9 @@ $(document).ready(function(){
 		}else{
 			var url = (window.location+"").substr(0, i);
 		}
-		window.location = url+"/edit/"+$(this).attr("data-id");
+		if ($(this).attr("data-id")){
+			window.location = url+"/edit/"+$(this).attr("data-id");
+		}
 	});
 	
 	$("#_place_food").autocomplete({

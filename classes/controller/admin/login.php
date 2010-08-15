@@ -28,8 +28,12 @@ class Controller_Admin_Login extends Controller_Admin {
 				$this->request->redirect('admin/places');
 			}
 		}
-		
 	}
+   
+   public function action_permission($controller=NULL)
+   {
+		$this->template->view = "<h2>Permission error <a href=\"".$_SERVER['REDIRECT_URL']."\" class=\"back\">Go back</a></h2><p>You has no read permission for ".$controller."</p>";
+   }
 	
 	public function action_logout()
 	{

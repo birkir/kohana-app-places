@@ -24,29 +24,34 @@ class Model_User extends ORM {
 	
  	protected $_rules = array
 	(
-		'title' => array
+		'title' 				=> array
 		(
-			'not_empty' => NULL,
+			'not_empty' 		=> NULL,
 		),
-		'username' => array
+		'username' 			=> array
 		(
-			'not_empty'		=> NULL,
-			'min_length'	=> array(4),
-			'max_length'	=> array(32),
-			'regex'			=> array('/^[-\pL\pN_.]++$/uD'),
+			'not_empty'			=> NULL,
+			'min_length'		=> array(4),
+			'max_length'		=> array(32),
+			'regex'				=> array('/^[-\pL\pN_.]++$/uD'),
 		),
-		'password' => array
+		'password' 			=> array
 		(
-			'not_empty'		=> NULL,
-			'min_length'	=> array(5),
-			'max_length'	=> array(42),
+			'not_empty'			=> NULL,
+			'min_length'		=> array(5),
+			'max_length'		=> array(42),
 		),
 		'email'				=> array
 		(
-			'not_empty'		=> NULL,
+			'not_empty'			=> NULL,
 			'min_length'		=> array(4),
 			'max_length'		=> array(127),
 			'validate::email'	=> NULL,
+		),
+		'enabled' 			=> array(
+			'not_empty'			=> NULL,
+			'min_length'		=> array(1),
+			'max_length'		=> array(1)
 		)
 	);
 	
@@ -56,7 +61,7 @@ class Model_User extends ORM {
 		'email'					=> array('email_available'),
 	);
 	
-	private $user;
+	private $user, $_user_id;
 	
 	public function validate_create(& $array) 
 	{
@@ -64,6 +69,7 @@ class Model_User extends ORM {
 			->rules('title', $this->_rules['title'])
 			->rules('password', $this->_rules['password'])
 			->rules('username', $this->_rules['username'])
+			->rules('enabled', $this->_rules['enabled'])
 			->rules('email', $this->_rules['email'])
 			->rule('password_confirm', 'Model_User::match_password')
 			->filter('username', 'trim')
@@ -80,6 +86,27 @@ class Model_User extends ORM {
 		}
 		
 		return $array;
+	}
+	
+	public function validate_change(& $array, $id=0)
+	{
+		$this->_user_id = $id;
+		$array = Validate::factory($array)
+			->rules('title', $this->_rules['title'])
+			->rules('email', $this->_rules['email'])
+			->rules('username', $this->_rules['username'])
+			->rules('enabled', $this->_rules['enabled'])
+			->filter('email', 'trim')
+			->filter('password', 'trim')
+			->callback('email', array($this, 'email_change'));
+ 
+		if(trim($array['password']) != '')
+		{
+			$array->rules('password', array('min_length'=> array(5), 'max_length'=>array(42)));
+		}
+ 
+ 
+		return $array;	
 	}
 	
 	/**
@@ -123,11 +150,11 @@ class Model_User extends ORM {
 	public function email_change(Validate $array, $field)
 	{
 		$exists = (bool) DB::select(array('COUNT("*")', 'total_count'))
-			->from($this->_table_name)
-			->where('email',   '=',   $array[$field])
-			->where('id',     '!=',   $this->id)
-			->execute($this->_db)
-			->get('total_count');
+		->from($this->_table_name)
+		->where('email', '=', $array[$field])
+		->where('user_id', '!=', $this->_user_id)
+		->execute($this->_db)
+		->get('total_count');
 			
 		if ($exists)
 		{

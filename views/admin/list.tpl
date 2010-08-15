@@ -27,4 +27,4 @@
 {$pagination}
 </div>
 <br />
-<a href="/admin/places/new" class="button floatl">New {$control}</a>
+<a href="/admin/{$controller}/new" class="button floatl">New {$control}</a>

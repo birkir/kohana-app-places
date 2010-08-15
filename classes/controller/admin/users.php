@@ -48,15 +48,95 @@ class Controller_Admin_Users extends Controller_Admin {
 		->find_all();
 	}
 	
+	public function action_edit($id=0)
+	{
+		$this->view = new View('smarty:admin/users');
+		$this->view->user = ORM::factory('user', $id);
+		$this->view->roles = ORM::factory('role')
+		->order_by('name', 'ASC')
+		->find_all();
+		
+		$this->view->user_roles = array();
+		foreach ($this->view->user->roles->find_all() as $role)
+		{
+			$this->view->user_roles[] = $role->role_id;
+		}
+		
+		$this->view->my_roles = array();
+		foreach ($this->_user->roles->find_all() as $role)
+		{
+			$this->view->my_roles[] = $role->role_id;
+		}
+		
+		if ($_POST)
+		{
+			$encrypt = Encrypt::instance('default');
+			
+			if (empty($_POST['password']))
+			{
+				$_POST['password'] = $this->view->user->password;
+			}else{
+				$_POST['password'] = $encrypt->encode($_POST['password']);
+			}
+			$_POST['password_confirm'] = $_POST['password'];
+			
+			$_roles = isset($_POST['roles']) ? $_POST['roles'] : array();
+			
+			$post = $this->view->user->validate_change($_POST, $this->view->user->user_id);
+			
+			if ($post->check())
+			{
+				$this->view->user
+				->values($post)
+				->save();
+				
+				if (isset($_roles))
+				{
+					foreach ($_roles as $role => $do)
+					{
+						$role = new Model_Role(array('role_id' => $role));
+						if ( ! $this->view->user->has('roles', $role))
+						{
+							$this->view->user->add('roles', $role);
+						}
+					}
+				}
+				foreach ($this->view->my_roles as $role)
+				{
+					$role = new Model_Role(array('role_id' => $role));
+					
+					if ( ! isset($_roles[$role->role_id]))
+					{
+						if ($this->view->user->has('roles', $role))
+						{
+							$this->view->user->remove('roles', $role);
+						}
+					}
+				}
+				
+				$this->request->redirect('admin/users/edit/'.$id);
+				
+			}
+			else
+			{
+				// $_POST = array_intersect_key($post->as_array(), $_POST);
+				$this->template->errors = $post->errors('user');
+			}
+		}
+	}
+	
 	public function action_new()
 	{
-		$_POST = array(
-			'username' => 'odinn',
-			'email' => 'odinn@eat.is',
-			'title' => 'Óðinn Þráinsson',
-			'password' => 'maniac',
-			'password_confirm' => 'maniac'
-		);
+		$this->view = new View('smarty:admin/users');
+		$this->view->user = ORM::factory('user', 0);
+		$this->view->roles = ORM::factory('role')
+		->order_by('name', 'ASC')
+		->find_all();
+		$this->view->my_roles = array();
+		foreach ($this->_user->roles->find_all() as $role)
+		{
+			$this->view->my_roles[] = $role->role_id;
+		}
 		
 		if ($_POST)
 		{
@@ -67,15 +147,16 @@ class Controller_Admin_Users extends Controller_Admin {
 				$this->user
 				->values($post)
 				->save();
-				
-				$role = new Model_Role(array('name' => 'login'));
-				$this->user->add('roles', $role);
+				foreach ($_POST['roles'] as $role)
+				{
+					$role = new Model_Role(array('name' => $role));
+					$this->user->add('roles', $role);
+				}
 				
 			}
 			else
 			{
 				$_POST = array_intersect_key($post->as_array(), $_POST);
-				
 				$this->template->errors = $post->errors('user');
 			}
 		}

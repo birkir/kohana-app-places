@@ -18,8 +18,8 @@ class Controller_Admin extends Controller {
 	);
 	
 	public $json = FALSE;
-	public $user;
-	public $items_per_page = 5;
+	public $user, $_user;
+	public $items_per_page = 25;
 	
 	public function before()
 	{
@@ -38,7 +38,15 @@ class Controller_Admin extends Controller {
 			$this->request->redirect('admin/login');
 		}
 		
-		View::set_global('user', ORM::factory('user', $this->_user));
+		$this->_user = ORM::factory('user', $this->_user);
+		$role = ORM::factory('role', array('name' => $this->request->controller));
+		
+		if (!$this->_user->has('roles', $role) AND $this->request->controller != 'login')
+		{
+			$this->request->redirect('admin/login/permission/'.$this->request->controller);
+		}
+		
+		View::set_global('user', $this->_user);
 		
 		if (isset($_GET['profiler']))
 		{
@@ -48,7 +56,7 @@ class Controller_Admin extends Controller {
 	
 	public function action_index()
 	{
-		$this->template = Request::factory('admin/places')->execute()->response;
+		$this->request->redirect('admin/places');
 	}
 	
 	public function after()
