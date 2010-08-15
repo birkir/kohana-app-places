@@ -36,7 +36,7 @@
 						</form>
 					</div>
 					<div id="user">
-						<div id="welcome">{"Welcome"|__}, <span></span></div>
+						<div id="welcome">{"Welcome"|__}, {$user->title}<span></span></div>
 						<div id="shortcuts">
 							<a href="/admin/profile" title="{"Profile"|__}">{"Profile"|__}</a>
 							<span>&nbsp;|&nbsp;</span>

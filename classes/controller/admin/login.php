@@ -25,7 +25,7 @@ class Controller_Admin_Login extends Controller_Admin {
 		{
 			if ($this->user->login($_POST['_u'], $_POST['_p']))
 			{
-				$this->request->redirect('admin');
+				$this->request->redirect('admin/places');
 			}
 		}
 		

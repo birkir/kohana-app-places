@@ -29,12 +29,16 @@ class Controller_Admin extends Controller {
 		
 		$this->template->menu = $this->menu;
 		
-		$this->template->controller = $this->request->controller;
+		View::set_global('controller', $this->request->controller);
 		
-		if ($this->request->controller != 'login' AND !$this->user->logged_in())
+		$this->_user = $this->user->logged_in();
+		
+		if ($this->request->controller != 'login' AND !$this->_user)
 		{
 			$this->request->redirect('admin/login');
 		}
+		
+		View::set_global('user', ORM::factory('user', $this->_user));
 		
 		if (isset($_GET['profiler']))
 		{

@@ -221,8 +221,9 @@ class Model_User extends ORM {
 		{
 			if ($encrypt->decode($user->password) == $password)
 			{
+				$user->logins = $user->logins + 1;
+				$user->save();
 				Cookie::set('login', $user->user_id, time() + $lifetime);
-				
 				return TRUE;
 			}
 		}
@@ -290,7 +291,7 @@ class Model_User extends ORM {
 					}
 				}
 				
-				return TRUE;
+				return $user->user_id;
 			}
 		}
 		

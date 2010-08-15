@@ -38,7 +38,7 @@ class Controller_Admin_Places extends Controller_Admin {
 			'items_per_page' => $this->items_per_page,
 		));
 		
-		$this->view->controller = Inflector::singular($this->request->controller);
+		$this->view->control = Inflector::singular($this->request->controller);
 		
 		$this->view->items = $this->place
 		->order_by('place_id', 'ASC')

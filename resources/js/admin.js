@@ -11,6 +11,20 @@ $(document).ready(function(){
 			}
 	});
 	
+	$("input.prompt, textarea.prompt").each(function(){
+		$(this).attr("data-prompt", $(this).val()).focus(function(){
+			if ($(this).val() == $(this).attr("data-prompt"))
+			{
+				$(this).removeClass('prompt').val("");
+			}
+		}).blur(function(){
+			if ($(this).val() == "")
+			{
+				$(this).val($(this).attr("data-prompt")).addClass("prompt");
+			}
+		});
+	});
+	
 	function split(val)
 	{
 		return val.split(/,\s*/);
@@ -23,7 +37,11 @@ $(document).ready(function(){
 	
 	$(".ui-table tbody tr").click(function(){
 		var i = (window.location+"").indexOf("?", 0);
-		var url = (window.location+"").substr(0, i);
+		if (i == -1){
+			var url = window.location;
+		}else{
+			var url = (window.location+"").substr(0, i);
+		}
 		window.location = url+"/edit/"+$(this).attr("data-id");
 	});
 	

@@ -1,4 +1,4 @@
-<h2>Places</h2>
+<h2>{$controller|ucfirst}</h2>
 <table class="ui-table noborder">
 	<thead>
 		<tr>
@@ -27,4 +27,4 @@
 {$pagination}
 </div>
 <br />
-<a href="/admin/places/new" class="button floatl">New {$controller}</a>
+<a href="/admin/places/new" class="button floatl">New {$control}</a>
