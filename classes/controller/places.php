@@ -37,6 +37,8 @@ class Controller_Places extends Controller_Interface {
 		->where("removed", "=", 0)
 		->find();
 		
+		$view->zip = $this->zip();
+		
 		if (!$view->place->loaded())
 		{
 			throw new Kohana_Exception("Place not found");
@@ -129,6 +131,8 @@ class Controller_Places extends Controller_Interface {
 		
 		$this->template->back = "places";
 		
+		$view->zip = $this->zip();
+		
 		$this->template->view = $view;
 	}
 	
@@ -140,6 +144,8 @@ class Controller_Places extends Controller_Interface {
 		$place = new Model_Place();
 		
 		$this->template->view = new View('smarty:places/list');
+		
+		$this->template->view->zip = $this->zip();
 		
 		$distance = $place->select($place->near(Cookie::get("lat", 0), Cookie::get("lng", 0)));
 		
@@ -169,6 +175,8 @@ class Controller_Places extends Controller_Interface {
 	{
 		$view = new View('smarty:places/list');
 		
+		$view->zip = $this->zip();
+		
 		$food = ORM::factory('food')
 		->where(is_numeric($food) ? 'food_id' : 'alias', '=', $food)
 		->find();
@@ -192,6 +200,8 @@ class Controller_Places extends Controller_Interface {
 	public function action_random()
 	{
 		$view = new View('smarty:places/default');
+		
+		$view->zip = $this->zip();
 		
 		$hour = new Model_Hour;
 		
@@ -276,6 +286,21 @@ class Controller_Places extends Controller_Interface {
 		$view->p = isset($_POST) ? $_POST : NULL;
 		
 		$this->template->view = $view;
+	}
+	
+	public function zip()
+	{
+		$xml = new SimpleXMLElement(file_get_contents(APPPATH.'resources/xml/postnumer.xml'));
+		$ret = array();
+		foreach($xml->Postnumer as $zip)
+		{
+			if (isset($zip->Numer))
+			{
+				$ret[(int) $zip->Numer] = (string) $zip->Heiti;
+			}
+		}
+		
+		return $ret;
 	}
 	
 	/**

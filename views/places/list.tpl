@@ -1,6 +1,7 @@
 <ul class="places">
 {if $items->count() > 0}
 {foreach from=$items item=item}
+{assign var='_zip' value=$item->zip}
 	<li>
 		<a href="/places/view/{if empty($item->alias)}{$item->place_id}{else}{$item->alias}{/if}" title="{$item->title}">
 			<div class="cb">{$corner.start}
@@ -13,7 +14,7 @@
 				<div class="price_range">
 					{$item->price_from} - {$item->price_to} ISK
 				</div>
-				<h5>{$item->zip} {$item->city}</h5>
+				<h5>{$_zip} {$zip.$_zip}</h5>
 				<h6>{$item->street_name} {$item->street_number}{if isset($item->distance)} <span class="distance">({$item->distance|number_format:2} km)</span>{/if}</h6>
 <!--
 				<ul>

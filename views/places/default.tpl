@@ -1,7 +1,8 @@
 				<div class="cb">{$corner.start}
 {if $place}
+{assign var='_zip' value=$place->zip}
 					<h1>{$place->title}</h1>
-					<h2>{$place->street_name} {$place->street_number} <small>{$place->zip} {$place->city}</small></h2>
+					<h2>{$place->street_name} {$place->street_number} <small>{$_zip} {$zip.$_zip}</small></h2>
 					
 					{"Price range"|__}: {$place->price_from} - {$place->price_to}
 					
