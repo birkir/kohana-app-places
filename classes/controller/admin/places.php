@@ -56,6 +56,20 @@ class Controller_Admin_Places extends Controller_Admin {
 		
 		if ($_POST)
 		{
+			/**
+			 * Build Coords from street name
+			 *
+			 */
+			$location = $_POST['street_name']." ".$_POST['street_number'].", Iceland";
+			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=".urlencode($location)."&sensor=false");
+			$res = json_decode($res);
+			if ($res->status == "OK")
+			{
+				$geo = $res->results[0]->geometry->location;
+				$_POST['latitude'] = $geo->lat;
+				$_POST['longitude'] = $geo->lng;
+			}
+			
 			$p = $_POST;
 			
 			if ($this->view->place->values($_POST)->check())
@@ -135,6 +149,20 @@ class Controller_Admin_Places extends Controller_Admin {
 		// if post
 		if ($_POST)
 		{
+			/**
+			 * Build Coords from street name
+			 *
+			 */
+			$location = $_POST['street_name']." ".$_POST['street_number'].", Iceland";
+			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=".urlencode($location)."&sensor=false");
+			$res = json_decode($res);
+			if ($res->status == "OK")
+			{
+				$geo = $res->results[0]->geometry->location;
+				$_POST['latitude'] = $geo->lat;
+				$_POST['longitude'] = $geo->lng;
+			}
+			
 			$place = ORM::factory('place', $id);
 			
 			if ($place->values($_POST)->check())
