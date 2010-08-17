@@ -1,4 +1,4 @@
-Database schema:
+Database schema for v1.0:
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int(11) NOT NULL auto_increment,
