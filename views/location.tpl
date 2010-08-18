@@ -1,5 +1,5 @@
 			<div class="cb">{$corner.start}
-				<form method="post" action="/location">
+				<form method="post" action="/location/save">
 					<fieldset>
 						<dl>
 							<dt><label for="fieldset_location">{"Location"|__}</label></dt>

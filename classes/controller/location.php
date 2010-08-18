@@ -23,8 +23,33 @@ class Controller_Location extends Controller_Interface {
 	{
 		$this->template->view = new View('smarty:location');
 		
-		if (isset($_REQUEST['location']))
+		// Attach Address
+		$this->template->view->address = Cookie::get('address', NULL);
+		
+		// Display map
+		if (Cookie::get("lat", NULL))
 		{
+			$this->template->view->map = 'http://maps.google.com/maps/api/staticmap?center='.Cookie::get('address').'&zoom=14&size=410x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|'.Cookie::get('lat', NULL).','.Cookie::get('lng', NULL);
+		}
+	}
+	
+	public function action_save()
+	{
+		if (isset($_REQUEST['location']) && $_REQUEST['location'])
+		{
+			if ($_REQUEST['location'] == Cookie::get('address',null))
+			{
+				if ($uri = Cookie::get('return_uri'))
+				{
+					Cookie::delete('return_uri');
+					$this->request->redirect($uri);
+				}
+				else
+				{
+					$this->request->redirect('/');
+				}
+			}
+			
 			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=".urlencode($_REQUEST['location'])."&sensor=false");
 			$res = json_decode($res);
 			
@@ -36,22 +61,16 @@ class Controller_Location extends Controller_Interface {
 				Cookie::set("lat", $geo->lat);
 				Cookie::set("lng", $geo->lng);
 				
-				$this->request->redirect("/location");
-			}
-			else
-			{
-				$this->template->view->status = FALSE;
+				$this->request->redirect('location');
 			}
 		}
-		
-		// Attach Address
-		$this->template->view->address = Cookie::get("address", NULL);
-		
-		// Display map
-		if (Cookie::get("lat", NULL))
+		else
 		{
-			$this->template->view->map = "http://maps.google.com/maps/api/staticmap?center=".Cookie::get("address")."&zoom=14&size=410x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|".Cookie::get("lat", NULL).",".Cookie::get("lng", NULL);
+			Cookie::delete('address');
+			Cookie::delete('lat');
+			Cookie::delete('lng');
 		}
+		$this->request->redirect('location');
 	}
 	
 	/**
@@ -61,7 +80,7 @@ class Controller_Location extends Controller_Interface {
 	 */
 	public function action_set()
 	{
-		if (isset($_GET['lat']) AND isset($_GET['lat']))
+		if (isset($_GET['lat']) AND isset($_GET['lng']))
 		{
 			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=".urlencode($_GET['lat'].",".$_GET['lng'])."&sensor=false");
 			$res = json_decode($res);
