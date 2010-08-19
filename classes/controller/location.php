@@ -15,24 +15,31 @@ class Controller_Location extends Controller_Interface {
 	public $title = 'Location';
 
 	/**
-	 * Show current location if available.
+	 * Show current location if available and the option to get location from
+	 * GPS device or enter it manually.
 	 *
-	 * @return	object	View
+	 * @return	View
 	 */	
 	public function action_index()
 	{
+		// Set inner template
 		$this->template->view = new View('smarty:location');
 		
 		// Attach Address
 		$this->template->view->address = Cookie::get('address', NULL);
 		
-		// Display map
-		if (Cookie::get("lat", NULL))
+		// Display current map if latitude is set
+		if (Cookie::get('lat', NULL) AND Cookie::get('lng', NULL))
 		{
 			$this->template->view->map = 'http://maps.google.com/maps/api/staticmap?center='.Cookie::get('address').'&zoom=14&size=410x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|'.Cookie::get('lat', NULL).','.Cookie::get('lng', NULL);
 		}
 	}
 	
+	/**
+	 * Save location
+	 *
+	 * @return	View
+	 */
 	public function action_save()
 	{
 		if (isset($_REQUEST['location']) && $_REQUEST['location'])

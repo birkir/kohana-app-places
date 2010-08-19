@@ -1,10 +1,20 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Handles all resources the website will ever have to need. It minifies all
+ * javascript and stylesheets. Then it compresses every file to gzip and outputs
+ * it to the browser, if he accepts it.
+ *
+ * @package    Eat.is
+ * @category   Controller
+ * @author     Birkir Rafn Gudjonsson
+ * @copyright  (c) 2010 Eat.is
+ */
 class Controller_Resources extends Controller {
 
 	private $cache = TRUE;
 	protected $_directory = "resources/";
-
+	
 	public function action_index()
 	{
 		$this->request->response = "404 File not found";

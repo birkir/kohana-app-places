@@ -11,30 +11,32 @@
  * @copyright  (c) 2010 Eat.is
  */
 class Controller_Language extends Controller_Interface {
-
-	public $title = "Language",
-			 $languages = array(
-				"en-uk" => "English",
-				"is-is" => "Icelandic",
-				"pl-pl" => "Polish",
-				"ru-ru" => "Russian",
-				"dk-dk" => "Danish",
-				"no-no" => "Norway",
-				"fo-fo" => "Faroe Islands"
-			);
+	
+	// Set page title
+	public $title = 'Language';
+	
+	// Set available languages
+	public $languages = array(
+		'en-uk' => 'English',
+		'is-is' => 'Icelandic',
+		'pl-pl' => 'Polish',
+		'ru-ru' => 'Russian',
+		'dk-dk' => 'Danish',
+		'no-no' => 'Norway',
+		'fo-fo' => 'Faroe Islands'
+	);
 	
 	/**
-	 * List all languages
+	 * List all languages that are available. Note: Please do not show translations
+	 * that are less than 75% translated.
 	 *
-	 * @return	object	View
+	 * @return	View
 	 */
 	public function action_index()
 	{
-		$view = new View('smarty:language');
+		$this->template->view = new View('smarty:language');
 		
-		$view->languages = (object) $this->languages;
-		
-		$this->template->view = $view;
+		$this->template->view->languages = (object) $this->languages;
 	}
 	
 	/**
@@ -43,14 +45,19 @@ class Controller_Language extends Controller_Interface {
 	 * @param	string	Language code in ISO-639-1 format
 	 * @return	object	Request
 	 */
-	public function action_set($lang='en-uk')
+	public function action_set($lang=NULL)
 	{
-		if (isset($this->languages[$lang]))
+		if ($lang==NULL)
 		{
-			Cookie::set("language", $lang);
+			$lang = $this->language;
 		}
 		
-		$this->request->redirect("/language");
+		if (isset($this->languages[$lang]))
+		{
+			Cookie::set('language', $lang);
+		}
+		
+		$this->request->redirect('/language');
 	}
 
 } // End Controller_Language
