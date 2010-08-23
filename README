@@ -1,121 +1,40 @@
-Database schema for v1.0:
+## Eat.is application for Kohana 3.0
 
-CREATE TABLE IF NOT EXISTS `categories` (
-  `category_id` int(11) NOT NULL auto_increment,
-  `title` varchar(64) default NULL,
-  `alias` varchar(64) default NULL,
-  `index` int(11) NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '1',
-  `removed` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+This is complete application for kohana framework version 3 allowing people to find some places by distance, food types, categories, price range, etc. You can get directions to place, read its review and even rate it.
 
-CREATE TABLE IF NOT EXISTS `food` (
-  `food_id` int(11) NOT NULL auto_increment,
-  `title` varchar(64) NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '1',
-  `removed` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`food_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+### Requirements
 
-CREATE TABLE IF NOT EXISTS `hours` (
-  `hour_id` int(11) NOT NULL auto_increment,
-  `place_id` int(11) NOT NULL,
-  `day_of_week` tinyint(1) NOT NULL,
-  `open` int(11) NOT NULL,
-  `close` int(11) NOT NULL,
-  PRIMARY KEY  (`hour_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+* [Database module](http://github.com/kohana/database)
+* [ORM module](http://github.com/kohana/orm)
+* [Smarty module](http://github.com/MrAnchovy/kohana-module-smarty)
+* [Minify module](http://github.com/ryross/minify)
+* [Pagination module](http://github.com/kohana/pagination)
+* [Latest stable Kohana 3](http://github.com/kohana/kohana)
+* MySQL Database for a couple of tables
 
-CREATE TABLE IF NOT EXISTS `places` (
-  `place_id` int(11) NOT NULL auto_increment,
-  `title` varchar(128) NOT NULL,
-  `website` varchar(128) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `phone` varchar(32) NOT NULL,
-  `description` text NOT NULL,
-  `street_name` varchar(128) NOT NULL,
-  `street_number` varchar(12) NOT NULL,
-  `zip` int(3) NOT NULL,
-  `city` varchar(16) NOT NULL,
-  `price_from` int(11) NOT NULL,
-  `price_to` int(11) NOT NULL,
-  `latitude` double NOT NULL,
-  `longitude` double NOT NULL,
-  `enabled` tinyint(1) NOT NULL default '1',
-  `removed` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY (`place_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+### Installation
 
-CREATE TABLE IF NOT EXISTS `places_categories` (
-  `place_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY  (`place_id`,`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+1. Clone latest stable kohana repository.
+2. Make sure you have the required modules mentioned above.
+3. Update all submodules.
+4. Import __database.sql__ to new database in your favourite SQL editor.
+5. Rename __eat_is.example.php__ to __eat_is.php__ and change it to your specs.
+6. Rename __database.example.php__ to __database.php__ and write correct values.
+7. Create your admin user and start adding some places.
 
-CREATE TABLE IF NOT EXISTS `places_food` (
-  `place_id` int(11) NOT NULL,
-  `food_id` int(11) NOT NULL,
-  PRIMARY KEY  (`place_id`,`food_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+### Copyright
 
-CREATE TABLE IF NOT EXISTS `rating` (
-  `rating_id` INT( 11 ) NOT NULL auto_increment,
-  `place_id` INT( 11 ) NOT NULL ,
-  `rating` TINYINT( 1 ) NOT NULL ,
-  `user_id` INT( 11 ) NOT NULL
-  PRIMARY KEY  (`rating_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+The Eat.is application is copyright 2010 by following authors:
 
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(32) NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
- 
-INSERT INTO `roles` (`id`, `name`, `description`) VALUES
-(1, 'login', 'Login privileges, granted after account confirmation'),
-(2, 'admin', 'Administrative user, has access to everything.');
- 
- 
-CREATE TABLE IF NOT EXISTS `roles_users` (
-  `user_id` INT(10) UNSIGNED NOT NULL,
-  `role_id` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `fk_role_id` (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
- 
- 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(127) NOT NULL,
-  `username` VARCHAR(32) NOT NULL DEFAULT '',
-  `password` CHAR(50) NOT NULL,
-  `logins` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `last_login` INT(10) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
- 
-CREATE TABLE IF NOT EXISTS `user_tokens` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` INT(11) UNSIGNED NOT NULL,
-  `user_agent` VARCHAR(40) NOT NULL,
-  `token` VARCHAR(32) NOT NULL,
-  `created` INT(10) UNSIGNED NOT NULL,
-  `expires` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_token` (`token`),
-  KEY `fk_user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
- 
- 
-ALTER TABLE `roles_users`
-  ADD CONSTRAINT `roles_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `roles_users_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
- 
-ALTER TABLE `user_tokens`
-  ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+* Birkir R Gudjonsson http://birkir.forritun.org email birkir.gudjonsson@gmail.com
+* Odinn Thrainsson http://maniac.is email odinnt@gmail.com
+
+If you are seeing this, you some how entered our servers or git repository. Because we are cool, we dont give a __crap__ if you take the source code, so be our guest. Our plan was to have it open source but not distribute it, that way we have it for our self as long as we dont distribute it.
+
+Kohana is copyright 2008-2009 Kohana Team http://kohanaframework.com/license.html
+
+The Eat.is application for Kohana is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/
