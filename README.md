@@ -20,7 +20,7 @@ This is complete application for kohana framework version 3 allowing people to f
 4. Import __database.sql__ to new database in your favourite SQL editor.
 5. Rename __eat_is.example.php__ to __eat_is.php__ and change it to your specs.
 6. Rename __database.example.php__ to __database.php__ and write correct values.
-7. Create your admin user and start adding some places.
+7. Create __media__ and __minify__ in cache folder, chmod to 0777.
 
 ### Copyright
 
