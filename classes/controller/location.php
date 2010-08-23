@@ -89,9 +89,9 @@ class Controller_Location extends Controller_Interface {
 	{
 		if (isset($_GET['lat']) AND isset($_GET['lng']))
 		{
-			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=".urlencode($_GET['lat'].",".$_GET['lng'])."&sensor=false");
+			$res = file_get_contents('http://maps.google.com/maps/api/geocode/json?latlng='.urlencode($_GET['lat'].",".$_GET['lng']).'&sensor=false');
 			$res = json_decode($res);
-
+			
 			// Check if geocoding was successful
 			if ($res->status == "OK")
 			{

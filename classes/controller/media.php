@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Handles all resources the website will ever have to need. It minifies all
+ * Handles all media the website will ever have to need. It minifies all
  * javascript and stylesheets. Then it compresses every file to gzip and outputs
  * it to the browser, if he accepts it.
  *
@@ -10,10 +10,10 @@
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Controller_Resources extends Controller {
+class Controller_Media extends Controller {
 
 	private $cache = TRUE;
-	protected $_directory = "resources/";
+	protected $_directory = "media/";
 	
 	public function action_index()
 	{
@@ -105,7 +105,7 @@ class Controller_Resources extends Controller {
 	
 	public function gzip($file='')
 	{
-		$this->cached = APPPATH.'cache/resources/'.md5_file($file);
+		$this->cached = APPPATH.'cache/media/'.md5_file($file);
 		
 		if (!is_file($file))
 		{
@@ -119,4 +119,4 @@ class Controller_Resources extends Controller {
 		return $this->cached;
 	}
 
-} // End Controller_Resources
+} // End Controller_Media
