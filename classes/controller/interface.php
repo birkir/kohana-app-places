@@ -24,7 +24,7 @@ class Controller_Interface extends Controller {
 		$this->template = new View('default');
 
 		// Load Eat.is config
-		$this->config = Kohana::config("eat_is");
+		$this->config = Kohana::$config->load("eat_is");
 
 		// Cookie configuration
 		Cookie::$expiration = $this->config['cookies']['expiration'];
@@ -42,7 +42,7 @@ class Controller_Interface extends Controller {
 
 		// Fetch javascripts
 		$this->template->js = Minify::factory('js')
-		->set(file_get_contents(APPPATH.'resources/js/eat.js'))
+		->set(file_get_contents(APPPATH.'media/js/eat.js'))
 		->min();
 
 		// Set global variables for template
@@ -66,7 +66,7 @@ class Controller_Interface extends Controller {
 	public function after()
 	{
 		$this->template->title = isset($this->title) ? $this->title : NULL;
-		$this->request->response = $this->template;
+		$this->response->body($this->template->render());
 	}
 
 } // End Controller_Template

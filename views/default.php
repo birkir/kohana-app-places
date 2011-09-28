@@ -18,7 +18,7 @@
 				<div id="shortcuts">
 					<ul>
 						<li><a href="/location" title="<?php echo __('Location'); ?>"><img src="/media/img/icon-location<?php if ($location->longitude == NULL): ?>-unselected<?php endif; ?>.png" id="_location_img" alt="" style="width:64px;height:64px;" /></a></li>
-						<li><a href="/language" title="<?php echo __('Language'); ?>"><img src="/media/img/i18n/<?php ecgo $language; ?>.png" id="_language_img" alt="" style="width:64px;height:64px;" /></a></li>
+						<li><a href="/language" title="<?php echo __('Language'); ?>"><img src="/media/img/i18n/<?php echo $language; ?>.png" id="_language_img" alt="" style="width:64px;height:64px;" /></a></li>
 					</ul>
 				</div>
 			</div>

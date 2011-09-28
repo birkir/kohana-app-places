@@ -6,11 +6,11 @@ return array
 		'title' => 'Eat.is',
 	),
 	'cookies' => array(
-		'domain' => '.example.com', // Notice the first dot
+		'domain' => 'eat.forritun.org',
 		'expiration' => 86400 * 6 * 4,
-		'salt' => '', // Required to encrypt cookies
+		'salt' => 'LoremipsumDolorSitAmet123',
 	),
 	'google' => array(
-		'maps' => '' // Required to display maps
+		'maps' => 'ABQIAAAA9mAeHhodppHed20hX5TnVhTJOlUQWMnqpQObTykEtI0t-ZpaMBTf8v4dua9ndAX2e1qw20RpM4by5Q' // Required to display maps
 	)
 );

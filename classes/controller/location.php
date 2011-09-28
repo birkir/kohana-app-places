@@ -11,7 +11,7 @@
  * @copyright  (c) 2010 Eat.is
  */
 class Controller_Location extends Controller_Interface {
-	
+
 	public $title = 'Location';
 
 	/**
@@ -19,22 +19,22 @@ class Controller_Location extends Controller_Interface {
 	 * GPS device or enter it manually.
 	 *
 	 * @return	View
-	 */	
+	 */
 	public function action_index()
 	{
 		// Set inner template
-		$this->template->view = new View('smarty:location');
-		
+		$this->template->view = new View('location');
+
 		// Attach Address
 		$this->template->view->address = Cookie::get('address', NULL);
-		
+
 		// Display current map if latitude is set
 		if (Cookie::get('lat', NULL) AND Cookie::get('lng', NULL))
 		{
 			$this->template->view->map = 'http://maps.google.com/maps/api/staticmap?center='.Cookie::get('address').'&zoom=14&size=410x300&maptype=roadmap&sensor=false&markers=color:blue|label:S|'.Cookie::get('lat', NULL).','.Cookie::get('lng', NULL);
 		}
 	}
-	
+
 	/**
 	 * Save location
 	 *
@@ -56,10 +56,10 @@ class Controller_Location extends Controller_Interface {
 					$this->request->redirect('/');
 				}
 			}
-			
+
 			$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?address=".urlencode($_REQUEST['location'])."&sensor=false");
 			$res = json_decode($res);
-			
+
 			// Check if geocoding was successful
 			if ($res->status == "OK")
 			{
@@ -67,7 +67,7 @@ class Controller_Location extends Controller_Interface {
 				Cookie::set("address", $res->results[0]->formatted_address);
 				Cookie::set("lat", $geo->lat);
 				Cookie::set("lng", $geo->lng);
-				
+
 				$this->request->redirect('location');
 			}
 		}
@@ -79,7 +79,7 @@ class Controller_Location extends Controller_Interface {
 		}
 		$this->request->redirect('location');
 	}
-	
+
 	/**
 	 * Set current location with _GET request, is used by GPS.
 	 *
@@ -91,7 +91,7 @@ class Controller_Location extends Controller_Interface {
 		{
 			$res = file_get_contents('http://maps.google.com/maps/api/geocode/json?latlng='.urlencode($_GET['lat'].",".$_GET['lng']).'&sensor=false');
 			$res = json_decode($res);
-			
+
 			// Check if geocoding was successful
 			if ($res->status == "OK")
 			{
@@ -102,8 +102,8 @@ class Controller_Location extends Controller_Interface {
 				die(json_encode(array("status" => "OK")));
 			}
 		}
-		
+
 		die(json_encode(array("status" => "BAD")));
 	}
-	
+
 }

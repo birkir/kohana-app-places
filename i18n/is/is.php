@@ -32,7 +32,7 @@ return array
 	'phone' => 'sími',
 	'Fax' => 'Fax',
 	'fax' => 'fax',
-	
+
 	// Days
 	'Mon' => 'Mán',
 	'Tue' => 'Þri',
@@ -40,18 +40,18 @@ return array
 	'Thu' => 'Fim',
 	'Fri' => 'Fös',
 	'Sat' => 'Lau',
-	
+
 	// Header
 	'Home' => 'Heim',
 	'Language' => 'Tungumál',
 	'Location' => 'Staðsetning',
-	
+
 	// Top Level Menu
 	'Places' => 'Staðir',
 	'Random' => 'Af handahófi',
 	'I want ...' => 'Mig langar í...',
 	'What\'s close?' => 'Hvað er nálægt?',
-	
+
 	// Food types
 	'Food type' => 'Fæðutegund',
 	'Food types' => 'Fæðutegundir',
@@ -64,8 +64,12 @@ return array
 		'Fish' => 'Fiskur',
 		'Soup' => 'Súpur',
 		'Fruit' => 'Ávextir',
-		
-	
+		'Lamb' => 'Lamb',
+		'Lobster' => 'Humar',
+		'Meat' => 'Kjöt',
+		'Steak' => 'Steik',
+
+
 	// Places
 	'Restaurants' => 'Veitingastaðir',
 	'Fast food' => 'Skyndibiti',
@@ -81,7 +85,7 @@ return array
 	'Danish' => 'Danska',
 	'Norway' => 'Norska',
 	'Faroe Islands' => 'Færeyska',
-	
+
 	// Location
 	'Direction' => 'Vegvísir',
 	'Directions' => 'Vegvísun',
@@ -91,7 +95,7 @@ return array
 		'Make sure all street and city names are spelled correctly.' => 'Gakktu úr skugga um að öll götu-og borgarnöfn séu stafsett rétt.',
 		'Make sure your address includes a city and street.' => 'Gakktu úr skugga um að staðsetningin innihaldi borg og götu.',
 		'Try entering a zip code.' => 'Prófaðu að slá inn póstnúmer.',
-	
+
 	// Error validation
 	'You have following errors:' => 'Upp komu eftirfarandi villur:',
 		':field must not be empty' => ':field getur ekki vera tómt',

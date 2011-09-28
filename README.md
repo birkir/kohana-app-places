@@ -6,10 +6,9 @@ This is complete application for kohana framework version 3 allowing people to f
 
 * [Database module](http://github.com/kohana/database)
 * [ORM module](http://github.com/kohana/orm)
-* [Smarty module](http://github.com/MrAnchovy/kohana-module-smarty)
 * [Minify module](http://github.com/ryross/minify)
 * [Pagination module](http://github.com/kohana/pagination)
-* [Latest stable Kohana 3](http://github.com/kohana/kohana)
+* [Kohana 3.2/master](http://github.com/kohana/kohana)
 * MySQL Database for a couple of tables
 
 ### Installation
@@ -20,7 +19,8 @@ This is complete application for kohana framework version 3 allowing people to f
 4. Import __database.sql__ to new database in your favourite SQL editor.
 5. Rename __eat_is.example.php__ to __eat_is.php__ and change it to your specs.
 6. Rename __database.example.php__ to __database.php__ and write correct values.
-7. Create __media__ and __minify__ in cache folder, chmod to 0777.
+7. Copy __media__ folder to root of web server.
+8. Create __media__ and __minify__ in cache folder, chmod to 0777.
 
 ### Copyright
 
