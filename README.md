@@ -24,14 +24,18 @@ This is complete application for kohana framework version 3 allowing people to f
 
 ### Copyright
 
-The Eat.is application is copyright 2010 by following authors:
+The Eat.is design is copyright 2011 by following authors:
+
+* Birkir R Gudjonsson http://birkir.forritun.org email birkir.gudjonsson@gmail.com
+
+The Eat.is application is copyright 2011 by following authors:
 
 * Birkir R Gudjonsson http://birkir.forritun.org email birkir.gudjonsson@gmail.com
 * Odinn Thrainsson http://maniac.is email odinnt@gmail.com
 
 If you are seeing this, you some how entered our servers or git repository. Because we are cool, we dont give a __crap__ if you take the source code, so be our guest. Our plan was to have it open source but not distribute it, that way we have it for our self as long as we dont distribute it.
 
-Kohana is copyright 2008-2009 Kohana Team http://kohanaframework.com/license.html
+Kohana is copyright 2008-2011 Kohana Team http://kohanaframework.com/license.html
 
 The Eat.is application for Kohana is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
