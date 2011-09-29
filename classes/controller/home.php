@@ -23,8 +23,12 @@ class Controller_Home extends Controller_Interface {
 				"alias" => "places/random"
 			),
 			(object) array(
-				"title" => "I want ...",
+				"title" => "Food types",
 				"alias" => "places/food_types"
+			),
+			(object) array(
+				"title" => "Price range",
+				"alias" => "places/price_range"
 			),
 			(object) array(
 				"title" => "What's close?",

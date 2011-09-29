@@ -14,6 +14,12 @@
 					<?php echo $item->price_from; ?> - <?php echo $item->price_to; ?> ISK
 				</div>
 				<h5><?php echo $item->zip; ?> <?php echo $zip[$item->zip]; ?></h5>
+<?php foreach ($item->hours->where('day_of_week', '=', date('w'))->find_all() as $hour): ?>
+	<?php if ($hour->open <= date('Hi') AND $hour->close >= date('Hi')): ?>
+		<span class="open right">Open</span>
+		<?php break; ?>
+	<?php endif; ?>
+<?php endforeach; ?>
 				<h6><?php echo $item->street_name; ?> <?php echo $item->street_number; ?><?php if (isset($item->distance)): ?> <span class="distance">(<?php echo number_format($item->distance, 2); ?> km)</span><?php endif; ?></h6>
 			<div class="clear"></div>
 			<?php echo $corner['end']; ?></div>

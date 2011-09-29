@@ -50,6 +50,7 @@ return array
 	'Places' => 'Staðir',
 	'Random' => 'Af handahófi',
 	'I want ...' => 'Mig langar í...',
+	'Price range' => 'Verðbil',
 	'What\'s close?' => 'Hvað er nálægt?',
 
 	// Food types

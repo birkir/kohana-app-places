@@ -78,7 +78,7 @@ class Controller_Places extends Controller_Interface {
 
 		$distance = $place->select($place->near(Cookie::get("lat", 0), Cookie::get("lng", 0)));
 
-		$this->template->view->items = $distance->order_by("distance", "ASC")->find_all();
+		$this->template->view->items = $distance->order_by("distance", "ASC")->limit(10)->find_all();
 	}
 
 	/**
@@ -120,6 +120,63 @@ class Controller_Places extends Controller_Interface {
 		$view->items = $food->place
 		->where('enabled', '=', 1)
 		->where('removed', '=', 0)
+		->find_all();
+
+		$this->template->view = $view;
+	}
+
+	/**
+	 * List all price ranges
+	 */
+	public function action_price_range()
+	{
+		$view = new View('misc/menu');
+
+		$view->menu = (object) array(
+			(object) array(
+				'title' => '0 - 1000 ISK',
+				'alias' => 'places/price/0-1000'
+			),
+			(object) array(
+				'title' => '1000 - 2000 ISK',
+				'alias' => 'places/price/1000-2000'
+			),
+			(object) array(
+				'title' => '2000 - 3000 ISK',
+				'alias' => 'places/price/2000-3000'
+			),
+			(object) array(
+				'title' => '3000 - 4000 ISK',
+				'alias' => 'places/price/3000-4000'
+			),
+			(object) array(
+				'title' => '4000 - 5000 ISK',
+				'alias' => 'places/price/4000-5000'
+			)
+		);
+
+		$this->template->view = $view;
+	}
+
+	/**
+	 * Find places by price range
+	 */
+	public function action_price()
+	{
+		$price = explode('-', $this->request->param('id'));
+
+		$view = new View('places/list');
+
+		$view->zip = $this->zip();
+
+		$view->items = ORM::factory('place')
+		->where('price_from', '>=', $price[0])
+		->where('price_to', '<=', $price[1])
+		->where('enabled', '=', 1)
+		->where('removed', '=', 0)
+		->order_by('price_from', 'ASC')
+		->group_by('title')
+		->limit(10)
 		->find_all();
 
 		$this->template->view = $view;
@@ -256,44 +313,8 @@ class Controller_Places extends Controller_Interface {
 		// Get directions
 
 		$res = file_get_contents("http://maps.google.com/maps/api/geocode/json?latlng=".urlencode($view->place->latitude.",".$view->place->longitude)."&sensor=false");
-		$res = json_decode($res);
 
-		$origin = Cookie::get('address', NULL);
-		if (!$origin)
-		{
-			Cookie::set('return_uri',$this->request->uri());
-			$this->request->redirect('location');
-		}
-		if ($res->status == "OK")
-		{
-			$destination = $res->results[0]->formatted_address;
-
-			$res = file_get_contents("http://maps.google.com/maps/api/directions/json?origin=".urlencode($origin)."&destination=".urlencode($destination)."&sensor=false");
-			$res = json_decode($res);
-
-			if ($res->status == "OK")
-			{
-				$text_directions = array();
-				$map_directions = "path=rgba:0x0000FF80,weight:5|";
-				$map_directions_start = array(
-					'lat' => $res->routes[0]->legs[0]->steps[0]->start_location->lat,
-					'lng' => $res->routes[0]->legs[0]->steps[0]->start_location->lng,
-				);
-				foreach($res->routes[0]->legs[0]->steps as $item)
-				{
-					$text_directions[] = $item->html_instructions;
-					$map_directions .= $item->start_location->lat.",".$item->start_location->lng."|";
-					$map_directions_stop = array(
-						'lat' => $item->start_location->lat,
-						'lng' => $item->start_location->lng,
-					);
-				}
-				$map_directions = "?markers=".$map_directions_start['lat'].",".$map_directions_start['lng'].",greena|".$map_directions_stop['lat'].",".$map_directions_stop['lng'].",greenb&".$map_directions;
-				$center_point_lat = ($map_directions_start['lat']+$map_directions_stop['lat'])/2;
-				$center_point_lng = ($map_directions_start['lng']+$map_directions_stop['lng'])/2;
-				$view->map = "http://maps.google.com/staticmap".$map_directions."&size=412x300&key=".$this->config['google']['maps']."&center=".$center_point_lat.",".$center_point_lng;
-			}
-		}
+		$view->map = "";
 
 		$this->template->view = $view;
 	}
