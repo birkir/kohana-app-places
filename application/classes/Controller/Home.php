@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Home extends Controller_Interface {
+class Controller_Home extends Controller_Base {
 
 	public $title = "Home";
 
@@ -14,4 +14,4 @@ class Controller_Home extends Controller_Interface {
 		$this->template->view = View::factory('misc/navigation');
 	}
 
-} // End Controller_Home
+} // End Home

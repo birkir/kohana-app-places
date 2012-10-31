@@ -6,9 +6,9 @@ return array
 		'title' => 'Eat.is',
 	),
 	'cookies' => array(
-		'domain' => '.example.com', // Notice the first dot
+		'domain' => 'eat.forritun.org', // Notice the first dot
 		'expiration' => 86400 * 6 * 4,
-		'salt' => '', // Required to encrypt cookies
+		'salt' => 'foobarbaz0123456789', // Required to encrypt cookies
 	),
 	'google' => array(
 		'maps' => '' // Required to display maps
