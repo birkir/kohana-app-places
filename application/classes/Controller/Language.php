@@ -10,11 +10,11 @@
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Controller_Language extends Controller_Interface {
-	
+class Controller_Language extends Controller_Base {
+
 	// Set page title
 	public $title = 'Language';
-	
+
 	// Set available languages
 	public $languages = array(
 		'en-uk' => 'English',
@@ -25,7 +25,7 @@ class Controller_Language extends Controller_Interface {
 		'no-no' => 'Norway',
 		'fo-fo' => 'Faroe Islands'
 	);
-	
+
 	/**
 	 * List all languages that are available. Note: Please do not show translations
 	 * that are less than 75% translated.
@@ -34,11 +34,10 @@ class Controller_Language extends Controller_Interface {
 	 */
 	public function action_index()
 	{
-		$this->template->view = new View('smarty:language');
-		
-		$this->template->view->languages = (object) $this->languages;
+		$this->template->view = View::factory('language')
+		->set('languages', (object) $this->languages);
 	}
-	
+
 	/**
 	 * Set language
 	 *
@@ -47,18 +46,17 @@ class Controller_Language extends Controller_Interface {
 	 */
 	public function action_set($lang=NULL)
 	{
-		if ($lang==NULL)
+		if ($lang === NULL)
 		{
 			$lang = $this->language;
 		}
-		
+
 		if (isset($this->languages[$lang]))
 		{
 			Cookie::set('language', $lang);
 		}
-		
+
 		$this->request->redirect('/language');
 	}
 
 } // End Controller_Language
-

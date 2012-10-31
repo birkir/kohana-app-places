@@ -10,8 +10,8 @@
  * @author     Birkir Rafn Gudjonsson
  * @copyright  (c) 2010 Eat.is
  */
-class Controller_Location extends Controller_Interface {
-	
+class Controller_Location extends Controller_Base {
+
 	public $title = 'Location';
 
 	/**
