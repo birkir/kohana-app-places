@@ -6,7 +6,7 @@ return array
 		'title' => 'Eat.is',
 	),
 	'cookies' => array(
-		'domain' => 'eat.forritun.org', // Notice the first dot
+		'domain' => '.forritun.org', // Notice the first dot
 		'expiration' => 86400 * 6 * 4,
 		'salt' => 'foobarbaz0123456789', // Required to encrypt cookies
 	),

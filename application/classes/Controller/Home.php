@@ -11,7 +11,7 @@ class Controller_Home extends Controller_Base {
 	 */
 	public function action_index()
 	{
-		$this->template->view = View::factory('misc/navigation');
+		$this->template->view = View::factory('home/list');
 	}
 
 } // End Home

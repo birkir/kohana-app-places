@@ -12,11 +12,30 @@
  */
 class Controller_Base extends Controller_Template {
 
-	// Set default language
-	public $language = 'en-us';
+	/**
+	 * @var Language selected
+	 */
+	public $language = 'en-uk';
+
+	/**
+	 * @var Google Maps API
+	 */
+	public $maps = FALSE;
+
+	/**
+	 * @var Debug mode
+	 */
+	public $debug = FALSE;
+
+	/**
+	 * @var Require location set
+	 */
+	public $require_location = FALSE;
 
 	/**
 	 * Do all the "before" work for the controller´s action
+	 * 
+	 * @return void
 	 */
 	public function before()
 	{
@@ -26,47 +45,56 @@ class Controller_Base extends Controller_Template {
 		// load application config
 		$this->config = Kohana::$config->load('application');
 
-		// Cookie configuration
+		// cookie configuration
 		Cookie::$expiration = $this->config['cookies']['expiration'];
 		Cookie::$domain = $this->config['cookies']['domain'];
-		Cookie::$salt = $this->config['cookies']['salt'];
 
-		// Get language from cookie and assign to i18n
+		// get language from cookie
 		$this->language = Cookie::get('language', $this->language);
+
+		// set language to kohana
 		I18n::$lang = $this->language;
 
-		// Get location altitude and longitude
+		// get location altitude and longitude from cookie
 		$this->location = (object) array(
 			'latitude' => Cookie::get('lat', NULL),
 			'longitude' => Cookie::get('lng', NULL)
 		);
-/*
-		// Fetch javascripts
-		$this->template->js = Minify::factory('js')
-		->set(file_get_contents(APPPATH.'resources/js/eat.js'))
-		->min();
 
-		// Set global variables for template
-		View::set_global('project', (object) $this->config['project']);
-		View::set_global('language', $this->language);
-		View::set_global('location', $this->location);
-		View::set_global('corner', array('start' => '<div class="bt"><div></div></div><div class="i1"><div class="i2"><div class="i3">', 'end' => '</div></div></div><div class="bb"><div></div></div>'));
-*/
-		// Render profiler template if requested
-		if (isset($_GET['debug']))
-		{
-			$this->template->profiler = new View('profiler/stats');
-		}
+		// initialize translation
+		View::set_global('i18n', ORM::factory('Translation'));
+
+		// determine debug mode
+		$this->debug = $this->request->query('debug') !== NULL ? TRUE : FALSE;
 	}
 
 	/**
 	 * Do all the "after" work and render out template
 	 *
-	 * @return	Request	Response
+	 * @return void
 	 */
 	public function after()
 	{
+		// just want 
+		if ( !  Request::current()->is_initial() OR Request::current()->is_ajax())
+		{
+			$this->template = $this->template->view;
+
+			return parent::after();
+		}
+
+		// set class inherit values
+		$this->template->maps = $this->maps;
+		$this->template->debug = $this->debug;
+
+		// check for location setter
+		if ($this->require_location === TRUE AND ! Cookie::get('address', FALSE))
+		{
+			// redirect to set location
+			HTTP::redirect('/location');
+		}
+
 		parent::after();
 	}
 
-} // End Controller_Base
+} // End Base

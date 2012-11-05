@@ -12,10 +12,14 @@
  */
 class Controller_Language extends Controller_Base {
 
-	// Set page title
+	/**
+	 * @var Page title
+	 */
 	public $title = 'Language';
 
-	// Set available languages
+	/**
+	 * @var Available languages
+	 */
 	public $languages = array(
 		'en-uk' => 'English',
 		'is-is' => 'Icelandic',
@@ -34,7 +38,8 @@ class Controller_Language extends Controller_Base {
 	 */
 	public function action_index()
 	{
-		$this->template->view = View::factory('language')
+		// set view and languages
+		$this->template->view = View::factory('language/list')
 		->set('languages', (object) $this->languages);
 	}
 
@@ -44,19 +49,20 @@ class Controller_Language extends Controller_Base {
 	 * @param	string	Language code in ISO-639-1 format
 	 * @return	object	Request
 	 */
-	public function action_set($lang=NULL)
+	public function action_set()
 	{
-		if ($lang === NULL)
-		{
-			$lang = $this->language;
-		}
+		// get language parameter
+		$lang = $this->request->param('id', $this->language);
 
+		// check if requested language is available
 		if (isset($this->languages[$lang]))
 		{
+			// set it as a cookie
 			Cookie::set('language', $lang);
 		}
 
-		$this->request->redirect('/language');
+		// redirect to language selection (for texts to reload)
+		HTTP::redirect('/language');
 	}
 
-} // End Controller_Language
+} // End Language
