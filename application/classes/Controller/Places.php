@@ -184,11 +184,8 @@ class Controller_Places extends Controller_Base {
 		// check if place is loaded
 		if ( ! $item->loaded())
 		{
-			// set 404 template
-			$this->template->view = View::factory('misc/404');
-
-			// set 404 status code
-			return $this->response->status(404);
+			// throw 404 error
+			throw HTTP_Exception::factory(404, __('The requested URL :url was not found on this server.', array(':url' => $this->request->uri())));
 		}
 	}
 
