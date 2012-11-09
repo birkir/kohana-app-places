@@ -29,6 +29,8 @@ class Controller_Places extends Controller_Base {
 
 		// get all categories by index
 		$categories = ORM::factory('Category')
+		->where('enabled', '=', 1)
+		->where('deleted', '=', 0)
 		->order_by('index', 'ASC')
 		->find_all();
 	}
@@ -72,6 +74,10 @@ class Controller_Places extends Controller_Base {
 	 */
 	public function action_neighborhood()
 	{
+		// check for address
+		if ( ! Cookie::get('address', FALSE))
+			return HTTP::redirect('location?redirect');
+
 		// boot template
 		$this->template->view = View::factory('places/list')
 		->bind('items', $items);

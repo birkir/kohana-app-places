@@ -15,7 +15,7 @@ class Controller_Base extends Controller_Template {
 	/**
 	 * @var Language selected
 	 */
-	public $language = 'en-uk';
+	public $language = 'is-is';
 
 	/**
 	 * @var Google Maps API

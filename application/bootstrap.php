@@ -61,11 +61,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 /**
  * Set the default language
  */
-I18n::lang('en-us');
-
-/**
- * Set the cookie salt
- */
+I18n::lang('is-is');
 Cookie::$salt = $_SERVER['COOKIE_SALT'];
 
 /**
@@ -96,7 +92,10 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/',
-	'index_file' => ''
+	'index_file' => FALSE,
+	'errors'     => Kohana::$environment !== Kohana::PRODUCTION,
+	'profile'    => Kohana::$environment !== Kohana::PRODUCTION,
+	'caching'    => Kohana::$environment === Kohana::PRODUCTION
 ));
 
 /**
@@ -115,13 +114,10 @@ Kohana::$config->attach(new Config_File);
 Kohana::modules(array(
 	'auth'       => MODPATH.'auth',       // Basic authentication
 	'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	'database'   => MODPATH.'database',   // Database access
 	'image'      => MODPATH.'image',      // Image manipulation
 	'minion'     => MODPATH.'minion',     // CLI Tasks
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
 /**

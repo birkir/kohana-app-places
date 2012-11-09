@@ -103,6 +103,13 @@ nav.places ul li h6 { font-size:15px; color: #ababab; font-weight: normal; }
 nav.places ul li span.distance { color:#ababab; float: right; font-size: 15px; margin-top: 5px; font-weight: normal; }
 nav.places ul li div.price-range { color: #9c9c9c; font-size: 15px; font-weight: normal; }
 
+.specs { line-height: 20px; }
+
+.tags { margin-bottom: -6px; }
+.tags li a { background: #fcf600; padding: 10px 15px; text-decoration: none; color: #664422; float: left; border-radius: 15px; margin: 0 0 6px 6px; font-weight: 600; box-shadow: 2px 2px rgba(80,50,10,0.5);  }
+.tags li:first-child a { margin-left: 0; }
+.tags li a:hover { box-shadow: 2px 2px rgba(80, 50, 10, 0.8); background: #ffff00; }
+
 /** Stars **/
 div.stars { float: right; margin: 0 0 6px 0; }
 div.stars div { background:url(../img/stars.png); float:left; width:16px; height:16px; }

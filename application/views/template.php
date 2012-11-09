@@ -24,7 +24,7 @@
 				<nav class="top">
 					<ul>
 						<li><a href="/location" title="Location" class="icon-location<?=(Cookie::get('address', NULL) ? '-active' : NULL);?>"></a></li>
-						<li><a href="/language" title="Language" class="icon-language" style="background-image: url(/media/img/i18n/<?=Cookie::get('language', 'en-uk');?>.png);"></a></li>
+						<li><a href="/language" title="Language" class="icon-language" style="background-image: url(/media/img/i18n/<?=Cookie::get('language', 'is-is');?>.png);"></a></li>
 					</ul>
 				</nav>
 				<div class="clearfix"></div>
@@ -42,5 +42,17 @@
 		<?php endif; ?>
 		<script src="/media/js/lib.js"></script>
 		<script src="/media/js/app.js"></script>
+		<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', '<?=Arr::get($_SERVER, 'GA_TRACKING');?>']);
+		_gaq.push(['_setDomainName', 'eat.is']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 	</body>
 </html>

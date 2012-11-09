@@ -21,9 +21,12 @@ class Controller_Media extends Controller {
 		if ( ! $file)
 			throw new Kohana_Http_Exception_404;
 
+		$this->check_cache(sha1($this->request->uri()).filemtime($file));
+
 		$this->response->body(file_get_contents($file));
+
 		$this->response->headers('content-type', (string) File::mime_by_ext(pathinfo($file, PATHINFO_EXTENSION)));
-		$this->response->headers('content-length', (string) filesize($file));
+//		$this->response->headers('content-length', (string) filesize($file));
 		$this->response->headers('last-modified', (string) date('r', filemtime($file)));
 	}
 

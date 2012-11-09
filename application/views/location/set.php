@@ -1,3 +1,8 @@
+<?php if (isset($_GET['redirect'])): ?>
+<section>
+	<p><?=__('You have to set location for this part of the website.');?></p>
+</section>
+<?php endif; ?>
 <section class="location">
 	<?=Form::open(URL::base().'location', array('id' => 'location'));?>
 		<fieldset>

@@ -4,7 +4,7 @@
 			<?php foreach ($items as $i => $item): ?>
 			<?php $r = $item->rating->average(); ?>
 				<li>
-					<a href="<?=URL::base();?>places/details/<?=$item->id;?>" title="<?=$item->title;?>" onclick="return false;">
+					<a href="<?=URL::base();?>places/details/<?=$item->id;?>" title="<?=$item->title;?>">
 						<div class="col left">
 							<h3><?=$item->title;?></h3>
 							<h5><?=$item->zip->id;?> <?=$item->zip->title;?></h5>

@@ -4,13 +4,10 @@ return array
 (
 	'project' => array(
 		'title' => 'Eat.is',
+		'domain' => 'eat.is'
 	),
 	'cookies' => array(
-		'domain' => '.forritun.org', // Notice the first dot
-		'expiration' => 86400 * 6 * 4,
-		'salt' => 'foobarbaz0123456789', // Required to encrypt cookies
-	),
-	'google' => array(
-		'maps' => '' // Required to display maps
+		'domain' => '.eat.is',
+		'expiration' => 86400 * 6 * 4
 	)
 );
